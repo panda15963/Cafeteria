@@ -15,6 +15,11 @@ const config: Config = {
       },
     },
   },
+  turbo: {
+    loaders: {
+      '.svg': ['@svgr/webpack']
+    }
+  },
   plugins: [],
 }
 export default config
