@@ -22,13 +22,13 @@ const mainmenu: menus[] = [
     link: "/prices",
   },
   {
-    name: "Account",
+    name: "Sign In",
     link: "/signin",
   },
 ];
 const listItems = mainmenu.map((data) => (
   <li className="mt-3 md:mt-0 md:ml-6" key={data.name}>
-    <Link href={data.link || ""} className="block text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 bg-amber-100">
+    <Link href={data.link || ""} className="block text-lg text-black hover:text-gray-500 bg-amber-100 font-bold">
       {data.name}
     </Link>
   </li>
@@ -38,32 +38,6 @@ const MenuDetails = () => {
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
-  type menus = {
-    name?: string;
-    link?: string;
-  };
-  const data: menus[] = [
-    {
-      name: "Home",
-      link: "/",
-    },
-    {
-      name: "Menu",
-      link: "/menu",
-    },
-    {
-      name: "Services",
-      link: "/",
-    },
-    {
-      name: "Pricing",
-      link: "/",
-    },
-    {
-      name: "Contact",
-      link: "/",
-    },
-  ];
   return (
     <>
       <nav className={isOpen ? ("flex") : (" hidden md:flex")}>
