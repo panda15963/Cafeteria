@@ -11,19 +11,19 @@ const mainmenu: menus[] = [
   },
   {
     name: "Coffee Menu",
-    link: "/menu",
+    link: "/components/coffeeMenu/mainPage",
   },
   {
     name: "Locations",
-    link: "/locations",
+    link: "/components/Locations",
   },
   {
     name: "Prices",
-    link: "/prices",
+    link: "/components/Prices",
   },
   {
     name: "Sign In",
-    link: "/signin",
+    link: "/components/SignIn",
   },
 ];
 const listItems = mainmenu.map((data) => (
@@ -50,10 +50,10 @@ const MenuDetails = () => {
             width="24"
             height="24"
             stroke="currentColor"
-            stroke-width="2"
+            strokeWidth="2"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className={isOpen ? ("hidden") : ("flex")}
           >
             <line x1="3" y1="12" x2="21" y2="12"></line>
@@ -65,10 +65,10 @@ const MenuDetails = () => {
             width="24"
             height="24"
             stroke="currentColor"
-            stroke-width="2"
+            strokeWidth="2"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             className={isOpen ? ("flex") : ("hidden")}
           >
             <line x1="18" y1="6" x2="6" y2="18"></line>
