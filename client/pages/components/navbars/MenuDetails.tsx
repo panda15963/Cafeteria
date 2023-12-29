@@ -23,7 +23,7 @@ const mainmenu: menus[] = [
   },
   {
     name: "Sign In",
-    link: "/components/SignsInUp",
+    link: "/components/SignIn",
   },
 ];
 const listItems = mainmenu.map((data) => (
