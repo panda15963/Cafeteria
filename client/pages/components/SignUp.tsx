@@ -1,33 +1,36 @@
 import { useState } from "react";
-import axios from "axios";
 import NavBar from "./navbars/NavBar";
 import Footer from "./Footer";
+import axios from "axios";
 const Signup = () => {
-  const [formData, setFormData] = useState({
-    username: "",
-    name: "",
-    email: "",
-    password: "",
-  });
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [username, setUserName] = useState("");
+  const [name, setName] = useState("");
+  const sendDataToServer = async () => {
+    try {
+      const response = await axios.post('http://localhost:3001/api/signup', {
+        email,
+        password,
+        username,
+        name,
+      });
+      console.log(response);
+    } catch (error:any) {
+      console.error('Error sending data:', error.message);
+    }
+  }
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(location.origin); 
-    await axios.post(
-      "http://localhost:3000/",
-      {
-        username: formData.username,
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-      },
-      { withCredentials: true }
-    );
+    if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    } else if (name === "username") {
+      setUserName(value);
+    } else if (name === "name") {
+      setName(value);
+    }
   };
 
   return (
@@ -36,7 +39,7 @@ const Signup = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="bg-amber-100 p-8 rounded shadow-md w-96">
           <h2 className="text-2xl mb-4 text-center">Sign Up</h2>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={sendDataToServer}>
             <div className="mb-4">
               <label
                 htmlFor="username"
@@ -50,7 +53,7 @@ const Signup = () => {
                 name="username"
                 className="w-full p-2 border rounded"
                 placeholder="Enter your username"
-                value={formData.username}
+                value={username}
                 onChange={handleChange}
                 required
               />
@@ -68,7 +71,7 @@ const Signup = () => {
                 name="name"
                 className="w-full p-2 border rounded"
                 placeholder="Enter your Name"
-                value={formData.name}
+                value={name}
                 onChange={handleChange}
                 required
               />
@@ -86,7 +89,7 @@ const Signup = () => {
                 name="email"
                 className="w-full p-2 border rounded"
                 placeholder="Enter your email"
-                value={formData.email}
+                value={email}
                 onChange={handleChange}
                 required
               />
@@ -104,7 +107,7 @@ const Signup = () => {
                 name="password"
                 className="w-full p-2 border rounded"
                 placeholder="Enter your password"
-                value={formData.password}
+                value={password}
                 onChange={handleChange}
                 required
               />
