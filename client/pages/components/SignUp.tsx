@@ -7,17 +7,18 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [username, setUserName] = useState("");
   const [name, setName] = useState("");
-  const sendDataToServer = async () => {
+  const sendDataToServer = async (e: any) => {
+    e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/api/signup', {
+      const response = await axios.post("http://localhost:3001/api/signup", {
         email,
         password,
         username,
         name,
       });
       console.log(response);
-    } catch (error:any) {
-      console.error('Error sending data:', error.message);
+    } catch (error) {
+      console.log(error);
     }
   }
   const handleChange = (e: any) => {
