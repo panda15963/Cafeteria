@@ -16,7 +16,7 @@ const Signup = () => {
         username,
         name,
       });
-      console.log(response);
+      console.log(response.config.data.toString());
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +40,7 @@ const Signup = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="bg-amber-100 p-8 rounded shadow-md w-96">
           <h2 className="text-2xl mb-4 text-center">Sign Up</h2>
-          <form onSubmit={sendDataToServer}>
+          <form method="post" onSubmit={sendDataToServer}>
             <div className="mb-4">
               <label
                 htmlFor="username"
