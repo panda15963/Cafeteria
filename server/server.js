@@ -3,24 +3,18 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const e = require('express');
 const app = express();
-const port = 3001;
+const port = process.env.PORT;
 app.use(cors());
 app.use(bodyParser.json());
-
-app.post('/api/data', (req, res) => {
-  const inputData = req.body.input;
-  const responseData = {
-    message: `Received input: ${inputData}`,
-  };
-  res.json(responseData);
-});
-
+app.use(bodyParser.urlencoded({ extended: true }));
+// connect to mysql database
 const db = mysql.createConnection({
-  host : 'localhost',
-  user : 'root',
-  password : 'Panda7521ok!',
-  database : 'coffeeshop',
+  host : process.env.DB_HOST,
+  user : process.env.DB_USER,
+  password : process.env.DB_PWD,
+  database : process.env.DB_NAME,
 });
 db.connect((err) => {
   if (err) {
@@ -28,19 +22,21 @@ db.connect((err) => {
   }
   console.log('Connected to database');
 });
+// register a new user
 app.post('/api/signup', (req, res) => {
-  console.log(req.body);
-  const { email, password } = req.body;
-  const INSERT_USER_QUERY = `INSERT INTO users (email, name, username, password) VALUES ('${email}', 'name', 'username', '${password}')`;
+  const { email, password, name, username } = req.body;
+  const INSERT_USER_QUERY = `INSERT INTO users (email, password, name, username) VALUES ('${email}', '${password}', '${name}', '${username}')`;
   db.query(INSERT_USER_QUERY, (err, results) => {
     if (err) {
       return res.send(err);
     } else {
-      return res.send('successfully added user');
+      return res.send(results);
     }
   });
 });
+// login a user
 
+// listen on the port
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

@@ -16,7 +16,25 @@ const Signup = () => {
         username,
         name,
       });
-      console.log(response.config.data.toString());
+      if (response.data.sqlMessage === undefined) {
+        alert("User Created Successfully");
+        setEmail("");
+        setPassword("");
+        setUserName("");
+        setName("");
+        return;
+      }else if(response.data.sqlMessage.includes("Duplicate entry")){
+        alert("User Already Exists");
+        setEmail("");
+        setPassword("");
+        setUserName("");
+        setName("");
+        return;
+      }
+      setEmail("");
+      setPassword("");
+      setUserName("");
+      setName("");
     } catch (error) {
       console.log(error);
     }
