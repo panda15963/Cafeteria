@@ -16,6 +16,7 @@ const Signup = () => {
         username,
         name,
       });
+      console.log(response.data);
       if (response.data.sqlMessage === undefined) {
         alert("User Created Successfully");
         setEmail("");
