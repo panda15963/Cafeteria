@@ -7,6 +7,10 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [username, setUserName] = useState("");
   const [name, setName] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isUserNameValid, setIsUserNameValid] = useState(true);
+  const [isNameValid, setIsNameValid] = useState(true);
   const sendDataToServer = async (e: any) => {
     e.preventDefault();
     try {
@@ -16,7 +20,6 @@ const Signup = () => {
         username,
         name,
       });
-      console.log(response.data);
       if (response.data.sqlMessage === undefined) {
         alert("User Created Successfully");
         setEmail("");
@@ -32,6 +35,7 @@ const Signup = () => {
         setName("");
         return;
       }
+      alert("Error Occured");
       setEmail("");
       setPassword("");
       setUserName("");
@@ -43,12 +47,50 @@ const Signup = () => {
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     if (name === "email") {
-      setEmail(value);
+      if (value.length > 15) {
+        setIsEmailValid(false);
+      } else {
+        setIsEmailValid(true);
+        setEmail(value);
+      }      
     } else if (name === "password") {
+      console.log(value.search(/[0-9]/i));
+      if (value.length < 8) {
+        setIsPasswordValid(false);
+      } else if (value.length === 0) {
+        setIsPasswordValid(false);
+      } else if (value.search(/[a-z]/i) < 0 ){
+        setIsPasswordValid(false);
+      } else if (value.search(/[0-9]/) < 0) {
+        setIsPasswordValid(false);
+      } else if (value.search(/[!@#$%^&*]/) < 0) {
+        setIsPasswordValid(false);
+      } else {
+        setIsPasswordValid(true);
+        setPassword(value);
+      }
       setPassword(value);
     } else if (name === "username") {
-      setUserName(value);
+      if (value.length > 15) {
+        setIsUserNameValid(false);
+      } else if (value.search(/[!@#$%^&*]/) >= 0) {
+        setIsUserNameValid(false);
+      } else {
+        setIsUserNameValid(true);
+        setUserName(value);
+      }
     } else if (name === "name") {
+      if (value.search(/[!@#$%^&*]/) >= 0) {
+        setIsNameValid(false);
+      } else if (value.search(/[0-9]/) >= 0) {
+        setIsNameValid(false);
+      } else if (value.length === 0) {
+        setIsNameValid(false);
+      }
+      else {
+        setIsNameValid(true);
+        setName(value);
+      }
       setName(value);
     }
   };
@@ -71,12 +113,16 @@ const Signup = () => {
                 type="text"
                 id="username"
                 name="username"
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border-2 rounded"
                 placeholder="Enter your username"
                 value={username}
                 onChange={handleChange}
+                style={{ borderColor: isUserNameValid ? "green" : "red" }}
                 required
               />
+              <p style={{color : isUserNameValid ? "green" : "red"}}>
+                {isUserNameValid ? "" : "Username length should be less than 15 and should not contain any special character"}
+              </p>
             </div>
             <div className="mb-4">
               <label
@@ -89,7 +135,7 @@ const Signup = () => {
                 type="text"
                 id="name"
                 name="name"
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border-2 rounded"
                 placeholder="Enter your Name"
                 value={name}
                 onChange={handleChange}
@@ -107,12 +153,16 @@ const Signup = () => {
                 type="email"
                 id="email"
                 name="email"
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border-2 rounded"
                 placeholder="Enter your email"
                 value={email}
                 onChange={handleChange}
+                style={{ borderColor: isEmailValid ? "green" : "red" }}
                 required
               />
+              <p style={{color : isEmailValid ? "green" : "red"}}>
+                {isEmailValid ? "" : "Email length should be less than 15"}
+              </p>
             </div>
             <div className="mb-4">
               <label
@@ -125,12 +175,16 @@ const Signup = () => {
                 type="password"
                 id="password"
                 name="password"
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border-2 rounded"
                 placeholder="Enter your password"
                 value={password}
                 onChange={handleChange}
+                style={{ borderColor: isPasswordValid ? "green" : "red" }}
                 required
               />
+              <p style={{color : isPasswordValid ? "green" : "red"}}>
+                {isPasswordValid ? "" : "Password should longer than 8 characters and should contain atleast one number, one special character and one alphabet"}
+              </p>
             </div>
             <div className="mb-4">
               <button
