@@ -47,7 +47,7 @@ const Signup = () => {
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     if (name === "email") {
-      if (value.length > 15) {
+      if (value.split('@')[0].length > 15) {
         setIsEmailValid(false);
       } else {
         setIsEmailValid(true);
