@@ -54,22 +54,16 @@ const Signup = () => {
         setEmail(value);
       }      
     } else if (name === "password") {
-      console.log(value.search(/[0-9]/i));
       if (value.length < 8) {
         setIsPasswordValid(false);
-      } else if (value.length === 0) {
+      } else if (value.length === 0 || value === "" || value === null || value === undefined || value === " ") {
         setIsPasswordValid(false);
-      } else if (value.search(/[a-z]/i) < 0 ){
-        setIsPasswordValid(false);
-      } else if (value.search(/[0-9]/) < 0) {
-        setIsPasswordValid(false);
-      } else if (value.search(/[!@#$%^&*]/) < 0) {
+      } else if (value.search(/[a-z]/i) < 0 || value.search(/[A-Z]/i) < 0 || value.search(/[0-9]/) < 0 || value.search(/[!@#$%^&*]/) < 0) {
         setIsPasswordValid(false);
       } else {
         setIsPasswordValid(true);
         setPassword(value);
       }
-      setPassword(value);
     } else if (name === "username") {
       if (value.length > 15) {
         setIsUserNameValid(false);
@@ -80,21 +74,14 @@ const Signup = () => {
         setUserName(value);
       }
     } else if (name === "name") {
-      if (value.search(/[!@#$%^&*]/) >= 0) {
+      if (value.search(/[!@#$%^&*]/) >= 0 || value.search(/[0-9]/) >= 0) {
         setIsNameValid(false);
-      } else if (value.search(/[0-9]/) >= 0) {
-        setIsNameValid(false);
-      } else if (value.length === 0) {
-        setIsNameValid(false);
-      }
-      else {
+      } else {
         setIsNameValid(true);
         setName(value);
       }
-      setName(value);
     }
   };
-
   return (
     <div>
       <NavBar />
@@ -121,7 +108,7 @@ const Signup = () => {
                 required
               />
               <p style={{color : isUserNameValid ? "green" : "red"}}>
-                {isUserNameValid ? "" : "Username length should be less than 15 and should not contain any special character"}
+                {isUserNameValid ? "" : "Username should not contain any special character"}
               </p>
             </div>
             <div className="mb-4">
@@ -139,8 +126,12 @@ const Signup = () => {
                 placeholder="Enter your Name"
                 value={name}
                 onChange={handleChange}
+                style={{ borderColor: isNameValid ? "green" : "red" }}
                 required
               />
+              <p style={{color : isNameValid ? "green" : "red"}}>
+                {isNameValid ? "" : "Name should not contain any special character or number"}
+              </p>
             </div>
             <div className="mb-4">
               <label
@@ -201,5 +192,4 @@ const Signup = () => {
     </div>
   );
 };
-
 export default Signup;

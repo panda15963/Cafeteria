@@ -1,31 +1,66 @@
 import React, { useState } from "react";
 import NavBar from "./navbars/NavBar";
 import Footer from "./Footer";
+import axios from "axios";
 const SignIn = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isEmailValid, setIsEmailValid] = useState(true);
+  const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const getDataFromServer = async (e: any) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post("http://localhost:3001/api/signin", {
+        email,
+        password,
+      });
+      if (response.data.sqlMessage === undefined) {
+        alert("User Signed In Successfully");
+        setEmail("");
+        setPassword("");
+        return;
+      }
+      alert("Error Occured");
+      setEmail("");
+      setPassword("");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    if (name === "email") {
+      if (value.length > 15) {
+        setIsEmailValid(false);
+      } else {
+        setIsEmailValid(true);
+        setEmail(value);
+      }
+    } else if (name === "password") {
+      if (value.length < 8) {
+        setIsPasswordValid(false);
+      } else if (
+        value.length === 0 ||
+        value === "" ||
+        value === null ||
+        value === undefined ||
+        value === " "
+      ) {
+        setIsPasswordValid(false);
+      } else {
+        setIsPasswordValid(true);
+        setPassword(value);
+      }
+    }
   };
-
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-
-    // Perform your signin logic here
-    console.log("Form data submitted:", formData);
-  };
-
   return (
     <div>
       <NavBar />
       <div className="min-h-screen flex items-center justify-center">
         <div className="bg-amber-100 p-8 rounded shadow-md w-96">
           <h2 className="text-2xl mb-4 text-center">Sign In</h2>
-          <form onSubmit={handleSubmit}>
+          <form method="post" onSubmit={getDataFromServer}>
             <div className="mb-4">
               <label
                 htmlFor="email"
@@ -39,10 +74,13 @@ const SignIn = () => {
                 name="email"
                 className="w-full p-2 border rounded"
                 placeholder="Enter your email"
-                value={formData.email}
+                value={email}
                 onChange={handleChange}
                 required
               />
+              <p style={{color : isEmailValid ? "green" : "red"}}>
+                {isEmailValid ? "" : "Email is not valid"}
+              </p>
             </div>
             <div className="mb-4">
               <label
@@ -57,10 +95,14 @@ const SignIn = () => {
                 name="password"
                 className="w-full p-2 border rounded"
                 placeholder="Enter your password"
-                value={formData.password}
+                value={password}
                 onChange={handleChange}
+                style={{ borderColor: isPasswordValid ? "green" : "red" }}
                 required
               />
+              <p style={{color : isPasswordValid ? "green" : "red"}}>
+                {isPasswordValid ? "" : "Password is not valid"}
+              </p>
             </div>
             <div className="mb-4">
               <button
