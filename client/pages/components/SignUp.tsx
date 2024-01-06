@@ -54,16 +54,14 @@ const Signup = () => {
         setEmail(value);
       }      
     } else if (name === "password") {
-      if (value.length < 8) {
-        setIsPasswordValid(false);
-      } else if (value.length === 0 || value === "" || value === null || value === undefined || value === " ") {
-        setIsPasswordValid(false);
-      } else if (value.search(/[a-z]/i) < 0 || value.search(/[A-Z]/i) < 0 || value.search(/[0-9]/) < 0 || value.search(/[!@#$%^&*]/) < 0) {
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      if (!passwordRegex.test(value)) {
         setIsPasswordValid(false);
       } else {
         setIsPasswordValid(true);
         setPassword(value);
-      }
+      }      
+      setPassword(value);
     } else if (name === "username") {
       if (value.length > 15) {
         setIsUserNameValid(false);
@@ -174,7 +172,7 @@ const Signup = () => {
                 required
               />
               <p style={{color : isPasswordValid ? "green" : "red"}}>
-                {isPasswordValid ? "" : "Password should longer than 8 characters and should contain atleast one number, one special character and one alphabet"}
+                {isPasswordValid ? "" : "Password should contain atleast 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character"}
               </p>
             </div>
             <div className="mb-4">
