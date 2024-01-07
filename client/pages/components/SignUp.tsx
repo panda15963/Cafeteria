@@ -2,6 +2,7 @@ import { useState } from "react";
 import NavBar from "./navbars/NavBar";
 import Footer from "./Footer";
 import axios from "axios";
+import { list } from "postcss";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -46,10 +47,15 @@ const Signup = () => {
   }
   const handleChange = (e: any) => {
     const { name, value } = e.target;
+    const list_regex = ['!', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', '=', '_', '/', '?', '<', '>', ',', '.', ';', ':', '"', "'", '|', '{', '}', '[', ']', '~', '`'];
     if (name === "email") {
-      if (value.split('@')[0].length > 15) {
+      const id = value.split('@')[0];
+      if (id.length > 15) {
         setIsEmailValid(false);
-      } else {
+      } else if (list_regex.includes(id[id.length - 1])) {
+        setIsEmailValid(false);
+      }
+      else {
         setIsEmailValid(true);
         setEmail(value);
       }      
@@ -65,7 +71,7 @@ const Signup = () => {
     } else if (name === "username") {
       if (value.length > 15) {
         setIsUserNameValid(false);
-      } else if (value.search(/[!@#$%^&*]/) >= 0) {
+      } else if (list_regex.includes(value[value.length - 1])) {
         setIsUserNameValid(false);
       } else {
         setIsUserNameValid(true);
@@ -102,11 +108,11 @@ const Signup = () => {
                 placeholder="Enter your username"
                 value={username}
                 onChange={handleChange}
-                style={{ borderColor: isUserNameValid ? "green" : "red" }}
+                style={{ borderColor: isUserNameValid ? "black" : "red" }}
                 required
               />
-              <p style={{color : isUserNameValid ? "green" : "red"}}>
-                {isUserNameValid ? "" : "Username should not contain any special character"}
+              <p style={{color : isUserNameValid ? "" : "red"}}>
+                {isUserNameValid ? "" : "Username should not contain any special character and length should be less than 15"}
               </p>
             </div>
             <div className="mb-4">
@@ -124,10 +130,10 @@ const Signup = () => {
                 placeholder="Enter your Name"
                 value={name}
                 onChange={handleChange}
-                style={{ borderColor: isNameValid ? "green" : "red" }}
+                style={{ borderColor: isNameValid ? "black" : "red" }}
                 required
               />
-              <p style={{color : isNameValid ? "green" : "red"}}>
+              <p style={{color : isNameValid ? "" : "red"}}>
                 {isNameValid ? "" : "Name should not contain any special character or number"}
               </p>
             </div>
@@ -146,10 +152,10 @@ const Signup = () => {
                 placeholder="Enter your email"
                 value={email}
                 onChange={handleChange}
-                style={{ borderColor: isEmailValid ? "green" : "red" }}
+                style={{ borderColor: isEmailValid ? "black" : "red" }}
                 required
               />
-              <p style={{color : isEmailValid ? "green" : "red"}}>
+              <p style={{color : isEmailValid ? "" : "red"}}>
                 {isEmailValid ? "" : "Email length should be less than 15"}
               </p>
             </div>
@@ -168,10 +174,10 @@ const Signup = () => {
                 placeholder="Enter your password"
                 value={password}
                 onChange={handleChange}
-                style={{ borderColor: isPasswordValid ? "green" : "red" }}
+                style={{ borderColor: isPasswordValid ? "black" : "red" }}
                 required
               />
-              <p style={{color : isPasswordValid ? "green" : "red"}}>
+              <p style={{color : isPasswordValid ? "" : "red"}}>
                 {isPasswordValid ? "" : "Password should contain atleast 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character"}
               </p>
             </div>
