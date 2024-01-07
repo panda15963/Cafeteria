@@ -2,7 +2,7 @@ import { useState } from "react";
 import NavBar from "./navbars/NavBar";
 import Footer from "./Footer";
 import axios from "axios";
-import { list } from "postcss";
+import Link from "next/link";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -188,6 +188,11 @@ const Signup = () => {
               >
                 Sign Up
               </button>
+            </div>
+            <div className="text-center">
+              <Link href="SignIn" className="text-blue-500">
+                Already a user? Sign in here
+              </Link>
             </div>
           </form>
         </div>
