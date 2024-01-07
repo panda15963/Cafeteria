@@ -10,19 +10,18 @@ const SignIn = () => {
   const getDataFromServer = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3001/api/signin", {
-        email,
-        password,
+      const response = await axios.get("http://localhost:3001/api/signin", {
+        params: {
+          email,
+          password,
+        },
       });
-      if (response.data.sqlMessage === undefined) {
-        alert("User Signed In Successfully");
+      if (response.data.length === 0) {
+        alert("User Not Found");
         setEmail("");
         setPassword("");
         return;
       }
-      alert("Error Occured");
-      setEmail("");
-      setPassword("");
     } catch (error) {
       console.log(error);
     }
@@ -30,25 +29,26 @@ const SignIn = () => {
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
+    const list_regex = ['!', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', '=', '_', '/', '?', '<', '>', ',', '.', ';', ':', '"', "'", '|', '{', '}', '[', ']', '~', '`'];
     if (name === "email") {
-      if (value.split('@')[0].length > 15) {
+      const id = value.split('@')[0];
+      if (id.length > 15) {
         setIsEmailValid(false);
-      } else {
+      } else if (list_regex.includes(id[id.length - 1])) {
+        setIsEmailValid(false);
+      }
+      else {
         setIsEmailValid(true);
         setEmail(value);
       }
-    } else if (name === "password") {
+    }
+    if (name === "password") {
       if (value.length < 8) {
         setIsPasswordValid(false);
-      } else if (
-        value.length === 0 ||
-        value === "" ||
-        value === null ||
-        value === undefined ||
-        value === " "
-      ) {
+      } else if (list_regex.includes(value[value.length - 1])) {
         setIsPasswordValid(false);
-      } else {
+      }
+      else {
         setIsPasswordValid(true);
         setPassword(value);
       }
@@ -72,13 +72,14 @@ const SignIn = () => {
                 type="email"
                 id="email"
                 name="email"
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border-2 rounded"
                 placeholder="Enter your email"
                 value={email}
                 onChange={handleChange}
+                style={{ borderColor: isEmailValid ? "black" : "red" }}
                 required
               />
-              <p style={{color : isEmailValid ? "green" : "red"}}>
+              <p style={{color : isEmailValid ? "" : "red"}}>
                 {isEmailValid ? "" : "Email is not valid"}
               </p>
             </div>
@@ -93,14 +94,14 @@ const SignIn = () => {
                 type="password"
                 id="password"
                 name="password"
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border-2 rounded"
                 placeholder="Enter your password"
                 value={password}
                 onChange={handleChange}
-                style={{ borderColor: isPasswordValid ? "green" : "red" }}
+                style={{ borderColor: isPasswordValid ? "black" : "red" }}
                 required
               />
-              <p style={{color : isPasswordValid ? "green" : "red"}}>
+              <p style={{color : isPasswordValid ? "" : "red"}}>
                 {isPasswordValid ? "" : "Password is not valid"}
               </p>
             </div>
