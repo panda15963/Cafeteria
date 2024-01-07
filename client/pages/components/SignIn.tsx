@@ -10,11 +10,9 @@ const SignIn = () => {
   const getDataFromServer = async (e: any) => {
     e.preventDefault();
     try {
-      const response = await axios.get("http://localhost:3001/api/signin", {
-        params: {
-          email,
-          password,
-        },
+      const response = await axios.post("http://localhost:3001/api/signin", {
+        email,
+        password,
       });
       if (response.data.length === 0) {
         alert("User Not Found");
@@ -43,15 +41,9 @@ const SignIn = () => {
       }
     }
     if (name === "password") {
-      if (value.length < 8) {
-        setIsPasswordValid(false);
-      } else if (list_regex.includes(value[value.length - 1])) {
-        setIsPasswordValid(false);
-      }
-      else {
-        setIsPasswordValid(true);
-        setPassword(value);
-      }
+      setPassword(value);
+      console.log(setPassword(value));
+
     }
   };
   return (
@@ -79,7 +71,7 @@ const SignIn = () => {
                 style={{ borderColor: isEmailValid ? "black" : "red" }}
                 required
               />
-              <p style={{color : isEmailValid ? "" : "red"}}>
+              <p style={{ color: isEmailValid ? "" : "red" }}>
                 {isEmailValid ? "" : "Email is not valid"}
               </p>
             </div>
@@ -101,7 +93,7 @@ const SignIn = () => {
                 style={{ borderColor: isPasswordValid ? "black" : "red" }}
                 required
               />
-              <p style={{color : isPasswordValid ? "" : "red"}}>
+              <p style={{ color: isPasswordValid ? "" : "red" }}>
                 {isPasswordValid ? "" : "Password is not valid"}
               </p>
             </div>

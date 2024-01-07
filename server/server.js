@@ -35,7 +35,17 @@ app.post('/api/signup', (req, res) => {
   });
 });
 // login a user
-
+app.post('/api/sigin', (req, res) => {
+  const { username, password } = req.body;
+  const SELECT_USER_QUERY = `SELECT * FROM users WHERE username='${username}' AND password='${password}'`;
+  db.query(SELECT_USER_QUERY, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.send(results);
+    }
+  });
+});
 // listen on the port
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
