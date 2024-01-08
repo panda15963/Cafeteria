@@ -37,18 +37,24 @@ app.post('/api/signup', (req, res) => {
   });
 });
 // login a user
-const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
+const privateKey = fs.readFileSync(process.env.JWT_SECRET, 'utf8');
 app.post('/api/signin', (req, res) => {
   const { email, password } = req.body;
   const SELECT_USER_QUERY = `SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`;
   db.query(SELECT_USER_QUERY, (err, results) => {
-    if (err) {
-      res.send(err);
+    if (err){
+      return res.send(err);
     } else {
-      res.send(results);
+      if (results.length > 0) {
+        const token = jwt.sign({ email }, privateKey, { algorithm: 'HS256' });
+        return res.send({ token });
+      } else {
+        return res.send('Email or password is incorrect');
+      }
     }
   });
 });
-listen(port, () => {
+
+app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });

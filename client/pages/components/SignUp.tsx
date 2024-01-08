@@ -21,6 +21,7 @@ const Signup = () => {
         username,
         name,
       });
+      console.log(response.config.data);
       if (response.data.sqlMessage === undefined) {
         alert("User Created Successfully");
         setEmail("");
@@ -96,6 +97,7 @@ const Signup = () => {
         setIsPasswordValid(false);
       } else if (value.length >= 8) {
         setIsPasswordValid(true);
+        setPassword(value);
       } else if (value.split(" ").length > 1) {
         setIsPasswordValid(false);
       } else {
