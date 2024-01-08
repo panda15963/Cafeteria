@@ -14,8 +14,8 @@ const SignIn = () => {
         email,
         password,
       });
-      const token = response.data.token;
-      localStorage.setItem("token", token);
+      //const token = response.data.token;
+      //localStorage.setItem("token", token);
       setEmail("");
       setPassword("");
       console.log(response);
