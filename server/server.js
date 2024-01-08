@@ -3,8 +3,10 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const mysql = require('mysql');
+const jwt = require('jsonwebtoken');
 const app = express();
 const port = process.env.PORT || 3001;
+const fs = require('fs');
 require('dotenv').config();
 app.use(cors());
 app.use(bodyParser.json());
@@ -35,18 +37,18 @@ app.post('/api/signup', (req, res) => {
   });
 });
 // login a user
-app.post('/api/sigin', (req, res) => {
-  const { username, password } = req.body;
-  const SELECT_USER_QUERY = `SELECT * FROM users WHERE username='${username}' AND password='${password}'`;
+const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
+app.post('/api/signin', (req, res) => {
+  const { email, password } = req.body;
+  const SELECT_USER_QUERY = `SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`;
   db.query(SELECT_USER_QUERY, (err, results) => {
     if (err) {
-      return res.send(err);
+      res.send(err);
     } else {
-      return res.send(results);
+      res.send(results);
     }
   });
 });
-// listen on the port
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });

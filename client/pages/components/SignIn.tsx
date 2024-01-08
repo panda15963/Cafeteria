@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import NavBar from "./navbars/NavBar";
 import Footer from "./Footer";
 import axios from "axios";
@@ -14,36 +14,34 @@ const SignIn = () => {
         email,
         password,
       });
-      if (response.data.length === 0) {
-        alert("User Not Found");
-        setEmail("");
-        setPassword("");
-        return;
-      }
-    } catch (error) {
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+      setEmail("");
+      setPassword("");
+      console.log(response);
+    } catch (error:any) {
       console.log(error);
     }
-  }
-
+  };
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    const list_regex = ['!', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', '=', '_', '/', '?', '<', '>', ',', '.', ';', ':', '"', "'", '|', '{', '}', '[', ']', '~', '`'];
-    if (name === "email") {
-      const id = value.split('@')[0];
-      if (id.length > 15) {
-        setIsEmailValid(false);
-      } else if (list_regex.includes(id[id.length - 1])) {
-        setIsEmailValid(false);
-      }
-      else {
-        setIsEmailValid(true);
-        setEmail(value);
-      }
-    }
-    if (name === "password") {
-      setPassword(value);
-      console.log(setPassword(value));
-
+    switch (name) {
+      case "email":        
+        if (value.includes("@") && value.includes(".")) {
+          setIsEmailValid(true);
+          setEmail(value);
+        } else{
+          setIsEmailValid(false);
+        }
+        break;
+      case "password":
+        if (value.length >= 8) {
+          setIsPasswordValid(true);
+          setPassword(value);
+        } else {
+          setIsPasswordValid(false);
+        }
+        break;
     }
   };
   return (
@@ -66,13 +64,13 @@ const SignIn = () => {
                 name="email"
                 className="w-full p-2 border-2 rounded"
                 placeholder="Enter your email"
-                value={email}
+                defaultValue={email}
                 onChange={handleChange}
                 style={{ borderColor: isEmailValid ? "black" : "red" }}
                 required
               />
               <p style={{ color: isEmailValid ? "" : "red" }}>
-                {isEmailValid ? "" : "Email is not valid"}
+                {isEmailValid ? "" : "Email is not valid or empty"}
               </p>
             </div>
             <div className="mb-4">
@@ -88,13 +86,15 @@ const SignIn = () => {
                 name="password"
                 className="w-full p-2 border-2 rounded"
                 placeholder="Enter your password"
-                value={password}
+                defaultValue={password}
                 onChange={handleChange}
                 style={{ borderColor: isPasswordValid ? "black" : "red" }}
                 required
               />
               <p style={{ color: isPasswordValid ? "" : "red" }}>
-                {isPasswordValid ? "" : "Password is not valid"}
+                {isPasswordValid
+                  ? ""
+                  : "Password should be at least 8 characters long"}
               </p>
             </div>
             <div className="mb-4">
@@ -106,7 +106,7 @@ const SignIn = () => {
               </button>
             </div>
             <div className="text-center">
-              <a href="SignUp" className="text-blue-500">
+              <a href="SignUp" className="text-blue-500" onChange={getDataFromServer}>
                 New user? Sign up here
               </a>
             </div>

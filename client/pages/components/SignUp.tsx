@@ -28,7 +28,7 @@ const Signup = () => {
         setUserName("");
         setName("");
         return;
-      }else if(response.data.sqlMessage.includes("Duplicate entry")){
+      } else if (response.data.sqlMessage.includes("Duplicate entry")) {
         alert("User Already Exists");
         setEmail("");
         setPassword("");
@@ -44,34 +44,70 @@ const Signup = () => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
   const handleChange = (e: any) => {
     const { name, value } = e.target;
-    const list_regex = ['!', '#', '$', '%', '^', '&', '*', '(', ')', '-', '+', '=', '_', '/', '?', '<', '>', ',', '.', ';', ':', '"', "'", '|', '{', '}', '[', ']', '~', '`'];
+    const list_regex = [
+      "!",
+      "#",
+      "$",
+      "%",
+      "^",
+      "&",
+      "*",
+      "(",
+      ")",
+      "-",
+      "+",
+      "=",
+      "_",
+      "/",
+      "?",
+      "<",
+      ">",
+      ",",
+      ".",
+      ";",
+      ":",
+      '"',
+      "'",
+      "|",
+      "{",
+      "}",
+      "[",
+      "]",
+      "~",
+      "`",
+    ];
     if (name === "email") {
-      const id = value.split('@')[0];
+      const id = value.split("@")[0];
       if (id.length > 15) {
         setIsEmailValid(false);
       } else if (list_regex.includes(id[id.length - 1])) {
         setIsEmailValid(false);
-      }
-      else {
+      } else {
         setIsEmailValid(true);
         setEmail(value);
-      }      
+      }
     } else if (name === "password") {
-      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+      const passwordRegex =
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
       if (!passwordRegex.test(value)) {
+        setIsPasswordValid(false);
+      } else if (value.length >= 8) {
+        setIsPasswordValid(true);
+      } else if (value.split(" ").length > 1) {
         setIsPasswordValid(false);
       } else {
         setIsPasswordValid(true);
         setPassword(value);
-      }      
-      setPassword(value);
+      }
     } else if (name === "username") {
       if (value.length > 15) {
         setIsUserNameValid(false);
       } else if (list_regex.includes(value[value.length - 1])) {
+        setIsUserNameValid(false);
+      } else if (value.split(" ").length > 1) {
         setIsUserNameValid(false);
       } else {
         setIsUserNameValid(true);
@@ -79,6 +115,8 @@ const Signup = () => {
       }
     } else if (name === "name") {
       if (value.search(/[!@#$%^&*]/) >= 0 || value.search(/[0-9]/) >= 0) {
+        setIsNameValid(false);
+      } else if (value.split(" ").length > 1) {
         setIsNameValid(false);
       } else {
         setIsNameValid(true);
@@ -106,13 +144,15 @@ const Signup = () => {
                 name="username"
                 className="w-full p-2 border-2 rounded"
                 placeholder="Enter your username"
-                value={username}
+                defaultValue={username}
                 onChange={handleChange}
                 style={{ borderColor: isUserNameValid ? "black" : "red" }}
                 required
               />
-              <p style={{color : isUserNameValid ? "" : "red"}}>
-                {isUserNameValid ? "" : "Username should not contain any special character and length should be less than 15"}
+              <p style={{ color: isUserNameValid ? "" : "red" }}>
+                {isUserNameValid
+                  ? ""
+                  : "Username should not contain any special character and length should be less than 15"}
               </p>
             </div>
             <div className="mb-4">
@@ -128,13 +168,15 @@ const Signup = () => {
                 name="name"
                 className="w-full p-2 border-2 rounded"
                 placeholder="Enter your Name"
-                value={name}
+                defaultValue={name}
                 onChange={handleChange}
                 style={{ borderColor: isNameValid ? "black" : "red" }}
                 required
               />
-              <p style={{color : isNameValid ? "" : "red"}}>
-                {isNameValid ? "" : "Name should not contain any special character or number"}
+              <p style={{ color: isNameValid ? "" : "red" }}>
+                {isNameValid
+                  ? ""
+                  : "Name should not contain any special character or number"}
               </p>
             </div>
             <div className="mb-4">
@@ -150,12 +192,12 @@ const Signup = () => {
                 name="email"
                 className="w-full p-2 border-2 rounded"
                 placeholder="Enter your email"
-                value={email}
+                defaultValue={email}
                 onChange={handleChange}
                 style={{ borderColor: isEmailValid ? "black" : "red" }}
                 required
               />
-              <p style={{color : isEmailValid ? "" : "red"}}>
+              <p style={{ color: isEmailValid ? "" : "red" }}>
                 {isEmailValid ? "" : "Email length should be less than 15"}
               </p>
             </div>
@@ -172,19 +214,22 @@ const Signup = () => {
                 name="password"
                 className="w-full p-2 border-2 rounded"
                 placeholder="Enter your password"
-                value={password}
+                defaultValue={password}
                 onChange={handleChange}
                 style={{ borderColor: isPasswordValid ? "black" : "red" }}
                 required
               />
-              <p style={{color : isPasswordValid ? "" : "red"}}>
-                {isPasswordValid ? "" : "Password should contain atleast 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character"}
+              <p style={{ color: isPasswordValid ? "" : "red" }}>
+                {isPasswordValid
+                  ? ""
+                  : "Password should contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character"}
               </p>
             </div>
             <div className="mb-4">
               <button
                 type="submit"
                 className="w-full bg-blue-500 text-white p-2 rounded"
+                onChange={sendDataToServer}
               >
                 Sign Up
               </button>
