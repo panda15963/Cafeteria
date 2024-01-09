@@ -46,10 +46,11 @@ app.post('/api/signin', (req, res) => {
       return res.send(err);
     } else {
       if (results.length > 0) {
-        const token = jwt.sign({ email }, privateKey, { algorithm: 'HS256' });
-        return res.send({ token });
+        const user = results[0];
+        const token = jwt.sign({ id: user.id }, privateKey, { expiresIn: '1h' });
+        return res.send({ token, user });
       } else {
-        return res.send('Email or password is incorrect');
+        return res.send({ error: 'User not found' });
       }
     }
   });

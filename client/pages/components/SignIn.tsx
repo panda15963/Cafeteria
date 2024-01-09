@@ -7,6 +7,10 @@ const SignIn = () => {
   const [password, setPassword] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
+  const [user, setUser] = useState({});
+  const [token, setToken] = useState("");
+  const [isError, setIsError] = useState(false);
   const getDataFromServer = async (e: any) => {
     e.preventDefault();
     try {
@@ -14,9 +18,15 @@ const SignIn = () => {
         email,
         password,
       });
-      const token = response.data.token;
-      localStorage.setItem("token", token);
-      localStorage.setItem("email", email);      
+      if (response.data.token) {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("user", JSON.stringify(response.data.user));
+        setIsUserLoggedIn(true);
+        setUser(response.data.user);
+        setToken(response.data.token);
+      } else {
+        setIsError(true);
+      }
       setEmail("");
       setPassword("");
       console.log(response);
@@ -51,6 +61,12 @@ const SignIn = () => {
       <div className="min-h-screen flex items-center justify-center">
         <div className="bg-amber-100 p-8 rounded shadow-md w-96">
           <h2 className="text-2xl mb-4 text-center">Sign In</h2>
+          <p className="text-center text-red-500">
+            {isError ? "Invalid Credentials" : ""}
+            {isUserLoggedIn ? "User Logged In" : ""}
+            {user ? JSON.stringify(user) : ""}
+            {token ? token : ""}
+          </p>
           <form method="post" onSubmit={getDataFromServer}>
             <div className="mb-4">
               <label
