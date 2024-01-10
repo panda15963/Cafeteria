@@ -1,7 +1,9 @@
 import { useState } from "react";
-import NavBar from "./navbars/NavBar";
+import NavBar from './navbars/NavBar';
 import Footer from "./Footer";
 import axios from "axios";
+import Link from "next/link";
+import { useUser } from '../contexts/UserContext';
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -9,8 +11,9 @@ const SignIn = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [user, setUser] = useState({});
-  const [token, setToken] = useState("");
   const [isError, setIsError] = useState(false);
+  const { login } = useUser();
+  const user_info = JSON.parse(JSON.stringify(user) || "{}").name;
   const getDataFromServer = async (e: any) => {
     e.preventDefault();
     try {
@@ -18,18 +21,18 @@ const SignIn = () => {
         email,
         password,
       });
-      if (response.data.token) {
+      if (response.data.token) {        
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         setIsUserLoggedIn(true);
         setUser(response.data.user);
-        setToken(response.data.token);
+        login(response.data.user.name);
+        alert(response.data.user.name + " are logged in! Welcome to our site!");
       } else {
         setIsError(true);
       }
       setEmail("");
       setPassword("");
-      console.log(response);
     } catch (error:any) {
       console.log(error);
     }
@@ -62,10 +65,7 @@ const SignIn = () => {
         <div className="bg-amber-100 p-8 rounded shadow-md w-96">
           <h2 className="text-2xl mb-4 text-center">Sign In</h2>
           <p className="text-center text-red-500">
-            {isError ? "Invalid Credentials" : ""}
-            {isUserLoggedIn ? "User Logged In" : ""}
-            {user ? JSON.stringify(user) : ""}
-            {token ? token : ""}
+            {isUserLoggedIn ? user_info + " user, welcome to our site" : isError ?  "Email or password is incorrect" : ""}
           </p>
           <form method="post" onSubmit={getDataFromServer}>
             <div className="mb-4">
@@ -123,9 +123,9 @@ const SignIn = () => {
               </button>
             </div>
             <div className="text-center">
-              <a href="SignUp" className="text-blue-500" onChange={getDataFromServer}>
+              <Link href="SignUp" className="text-blue-500" onChange={getDataFromServer}>
                 New user? Sign up here
-              </a>
+              </Link>
             </div>
           </form>
         </div>
