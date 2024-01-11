@@ -33,7 +33,7 @@ const UpdateUser = () => {
             <NavBar />
             <div className="min-h-screen flex items-center justify-center">
                 <div className="bg-amber-100 p-8 rounded shadow-md w-96">
-                    <h2 className="text-2xl mb-4 text-center">Sign Up</h2>
+                    <h2 className="text-2xl mb-4 text-center">Update User</h2>
                     <form method="post">
                         
                     </form>
