@@ -18,20 +18,6 @@ const mainmenu: menus[] = [
     name: "Locations",
     link: "/components/Locations",
   },
-  {
-    name: "Prices",
-    link: "/components/Prices",
-  },
-];
-const user_menu: menus[] = [
-  {
-    name: "Profile",
-    link: "/components/Profile",
-  },
-  {
-    name: "Logout",
-    link: "/",
-  },
 ];
 const getUserName = () => {
   const user_info = JSON.parse(localStorage.getItem("user") || "{}").name;
@@ -52,6 +38,9 @@ const MenuDetails = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
+  };
+  const closeNavbar = () => {
+    setIsOpen(false);
   };
   return (
     <>

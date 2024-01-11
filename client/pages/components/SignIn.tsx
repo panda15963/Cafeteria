@@ -3,6 +3,7 @@ import NavBar from './navbars/NavBar';
 import Footer from "./Footer";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useUser } from '../contexts/UserContext';
 const SignIn = () => {
   const [email, setEmail] = useState("");
@@ -12,6 +13,7 @@ const SignIn = () => {
   const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
   const [user, setUser] = useState({});
   const [isError, setIsError] = useState(false);
+  const router = useRouter();
   const { login } = useUser();
   const user_info = JSON.parse(JSON.stringify(user) || "{}").name;
   const getDataFromServer = async (e: any) => {
@@ -25,14 +27,15 @@ const SignIn = () => {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         setIsUserLoggedIn(true);
+        setEmail("");
+        setPassword("");
         setUser(response.data.user);
         login(response.data.user.name);
-        alert(response.data.user.name + " are logged in! Welcome to our site!");
+        alert(response.data.user.name + ", you are logged in! Welcome to our site!");
       } else {
         setIsError(true);
       }
-      setEmail("");
-      setPassword("");
+      router.push({ pathname: "/" });
     } catch (error:any) {
       console.log(error);
     }

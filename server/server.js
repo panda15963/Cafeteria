@@ -55,7 +55,38 @@ app.post('/api/signin', (req, res) => {
     }
   });
 });
-
+// get all users
+app.get('/api/users', (req, res) => {
+  const userId = req.params.id;
+  db.query('SELECT * FROM users where id = ?', [userId], (err, results) => {
+    if (err) {
+      console.log('Mysql error : ',err);
+      res.status(500).send('Internal server error');
+    } else {
+      if (results.length > 0) {
+        res.json(results);
+      } else {
+        res.status(404).json({error: 'User not found'});  
+      }
+    }
+  });
+});
+// update a user
+app.put('/api/users/:id', (req, res) => {
+  const userId = req.params.id;
+  const { email, password, name, username } = req.body;
+  const UPDATE_USER_QUERY = `UPDATE users SET email = '${email}', password = '${password}', name = '${name}', username = '${username}' WHERE id = ${userId}`;
+  db.query(UPDATE_USER_QUERY, (err, results) => {
+    if (err) {
+      console.log('Mysql error : ',err);
+      res.status(500).send('Internal server error');
+    } else {
+      res.json({message: 'User updated successfully'});
+      return res.send(results);
+    }
+  });
+});
+// listen on port 3001
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });
