@@ -39,8 +39,8 @@ app.post('/api/signup', (req, res) => {
 // login a user
 const privateKey = fs.readFileSync(process.env.JWT_SECRET, 'utf8');
 app.post('/api/signin', (req, res) => {
-  const { email, password } = req.body;
-  const SELECT_USER_QUERY = `SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`;
+  const { email, password, id } = req.body;
+  const SELECT_USER_QUERY = `SELECT * FROM users WHERE id = '${id}' email = '${email}' AND password = '${password}'`;
   db.query(SELECT_USER_QUERY, (err, results) => {
     if (err){
       return res.send(err);
@@ -57,17 +57,13 @@ app.post('/api/signin', (req, res) => {
 });
 // get all users
 app.get('/api/users', (req, res) => {
-  const userId = req.params.id;
-  db.query('SELECT * FROM users where id = ?', [userId], (err, results) => {
+  const SELECT_ALL_USERS_QUERY = 'SELECT * FROM users';
+  db.query(SELECT_ALL_USERS_QUERY, (err, results) => {
     if (err) {
       console.log('Mysql error : ',err);
       res.status(500).send('Internal server error');
     } else {
-      if (results.length > 0) {
-        res.json(results);
-      } else {
-        res.status(404).json({error: 'User not found'});  
-      }
+      return res.send(results);
     }
   });
 });

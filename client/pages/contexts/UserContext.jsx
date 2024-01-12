@@ -6,13 +6,12 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const login = (userData) => {
     setUser(userData);
-    //console.log(userData);
   };
 
   const logout = () => {
     setUser(null);
   };
-
+  
   return (
     <UserContext.Provider value={{ user, login, logout }}>
       {children}

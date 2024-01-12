@@ -30,7 +30,7 @@ const SignIn = () => {
         setEmail("");
         setPassword("");
         setUser(response.data.user);
-        login(response.data.user.name);
+        login(response.data.user);
         alert(response.data.user.name + ", you are logged in! Welcome to our site!");
       } else {
         setIsError(true);
