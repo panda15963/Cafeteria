@@ -39,15 +39,17 @@ app.post('/api/signup', (req, res) => {
 // login a user
 const privateKey = fs.readFileSync(process.env.JWT_SECRET, 'utf8');
 app.post('/api/signin', (req, res) => {
-  const { email, password, id } = req.body;
-  const SELECT_USER_QUERY = `SELECT * FROM users WHERE id = '${id}' email = '${email}' AND password = '${password}'`;
+  const SELECT_USER_QUERY = `SELECT * FROM users`;
   db.query(SELECT_USER_QUERY, (err, results) => {
     if (err){
       return res.send(err);
     } else {
       if (results.length > 0) {
-        const user = results[0];
-        const token = jwt.sign({ id: user.id }, privateKey, { expiresIn: '1h' });
+        const user = results.find(user => user.email === req.body.email && user.password === req.body.password);
+        const token = jwt.sign({ user }, privateKey, { algorithm: 'HS256' });
+        if (!user) {
+          return res.send({ error: 'User not found' });
+        }
         return res.send({ token, user });
       } else {
         return res.send({ error: 'User not found' });

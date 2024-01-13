@@ -32,10 +32,10 @@ const SignIn = () => {
         setUser(response.data.user);
         login(response.data.user);
         alert(response.data.user.name + ", you are logged in! Welcome to our site!");
+        router.push("/");
       } else {
         setIsError(true);
       }
-      router.push({ pathname: "/" });
     } catch (error:any) {
       console.log(error);
     }
