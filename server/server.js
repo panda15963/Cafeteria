@@ -57,18 +57,6 @@ app.post('/api/signin', (req, res) => {
     }
   });
 });
-// get all users
-app.get('/api/users', (req, res) => {
-  const SELECT_ALL_USERS_QUERY = 'SELECT * FROM users';
-  db.query(SELECT_ALL_USERS_QUERY, (err, results) => {
-    if (err) {
-      console.log('Mysql error : ',err);
-      res.status(500).send('Internal server error');
-    } else {
-      return res.send(results);
-    }
-  });
-});
 // update a user
 app.put('/api/users/:id', (req, res) => {
   const userId = req.params.id;
