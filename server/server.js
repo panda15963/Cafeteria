@@ -58,16 +58,24 @@ app.post('/api/signin', (req, res) => {
   });
 });
 // update a user
-app.put('/api/users/:id', (req, res) => {
-  const userId = req.params.id;
+app.put('/api/updateuser', (req, res) => {
   const { email, password, name, username } = req.body;
-  const UPDATE_USER_QUERY = `UPDATE users SET email = '${email}', password = '${password}', name = '${name}', username = '${username}' WHERE id = ${userId}`;
+  const UPDATE_USER_QUERY = `UPDATE users SET email = '${email}', password = '${password}', name = '${name}', username = '${username}' WHERE id = '${req.body.id}'`;
   db.query(UPDATE_USER_QUERY, (err, results) => {
     if (err) {
-      console.log('Mysql error : ',err);
-      res.status(500).send('Internal server error');
+      return res.send(err);
     } else {
-      res.json({message: 'User updated successfully'});
+      return res.send(results);
+    }
+  });
+});
+// delete a user
+app.delete('/api/deleteuser', (req, res) => {
+  const DELETE_USER_QUERY = `DELETE FROM users WHERE id = '${req.body.id}'`;
+  db.query(DELETE_USER_QUERY, (err, results) => {
+    if(err) {
+      return res.send(err);
+    } else {
       return res.send(results);
     }
   });

@@ -20,9 +20,13 @@ const mainmenu: menus[] = [
   },
 ];
 const getUserName = () => {
-  const user_info = JSON.parse(localStorage.getItem("user") || "{}").name;
-  return user_info;
+  const user_name = JSON.parse(localStorage.getItem("user") || "{}").name;
+  return user_name;
 };
+const getNickName = () => {
+  const user_name = JSON.parse(localStorage.getItem("user") || "{}").username;
+  return user_name;
+}
 const mainlistItems = mainmenu.map((data) => (
   <li className="mt-3 md:mt-0 md:ml-6" key={data.name}>
     <Link
@@ -39,9 +43,6 @@ const MenuDetails = () => {
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
-  const closeNavbar = () => {
-    setIsOpen(false);
-  };
   return (
     <>
       <nav className={isOpen ? "flex" : "hidden md:flex"}>
@@ -54,7 +55,7 @@ const MenuDetails = () => {
                   href="/components/Profile"
                   className="block text-lg text-black hover:text-gray-500 bg-amber-100 font-bold"
                 >
-                  {getUserName()}
+                  {getUserName()} ( {getNickName()} )
                 </Link>
               </li>
               <li className="mt-3 md:mt-0 md:ml-6" key="logout">
