@@ -80,6 +80,17 @@ app.delete('/api/deleteuser', (req, res) => {
     }
   });
 });
+// search email and password by name
+app.get('/api/searchuser', (req, res) => {
+  const SELECT_USER_QUERY = `SELECT email, password FROM users WHERE name = '${req.query.name}' AND email = '${req.query.email}' AND password = '${req.query.password}'`;
+  db.query(SELECT_USER_QUERY, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.send(results);
+    }
+  });
+});
 // listen on port 3001
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);

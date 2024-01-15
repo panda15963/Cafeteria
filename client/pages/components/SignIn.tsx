@@ -23,7 +23,7 @@ const SignIn = () => {
         email,
         password,
       });
-      if (response.data.token) {        
+      if (response.data.token) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         setIsUserLoggedIn(true);
@@ -36,18 +36,18 @@ const SignIn = () => {
       } else {
         setIsError(true);
       }
-    } catch (error:any) {
+    } catch (error: any) {
       console.log(error);
     }
   };
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     switch (name) {
-      case "email":        
+      case "email":
         if (value.includes("@") && value.includes(".")) {
           setIsEmailValid(true);
           setEmail(value);
-        } else{
+        } else {
           setIsEmailValid(false);
         }
         break;
@@ -68,7 +68,7 @@ const SignIn = () => {
         <div className="bg-amber-100 p-8 rounded shadow-md w-96">
           <h2 className="text-2xl mb-4 text-center">Sign In</h2>
           <p className="text-center text-red-500">
-            {isUserLoggedIn ? user_info + " user, welcome to our site" : isError ?  "Email or password is incorrect" : ""}
+            {isUserLoggedIn ? user_info + " user, welcome to our site" : isError ? "Email or password is incorrect" : ""}
           </p>
           <form method="post" onSubmit={getDataFromServer}>
             <div className="mb-4">
@@ -128,6 +128,11 @@ const SignIn = () => {
             <div className="text-center">
               <Link href="SignUp" className="text-blue-500" onChange={getDataFromServer}>
                 New user? Sign up here
+              </Link>
+            </div>
+            <div className="text-center">
+              <Link href="missingIDPW" className="text-blue-500">
+                Forgot password or ID?
               </Link>
             </div>
           </form>
