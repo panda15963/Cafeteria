@@ -81,17 +81,13 @@ app.delete('/api/deleteuser', (req, res) => {
   });
 });
 // search email and password by name
-app.get('/api/missingidpw', (req, res) => {
+app.post('/api/searchuser', (req, res) => {
   const SEARCH_USER_QUERY = `SELECT email, password FROM users WHERE name = '${req.body.name}'`;
   db.query(SEARCH_USER_QUERY, (err, results) => {
     if (err) {
       return res.send(err);
     } else {
-      if (results.length > 0) {
-        return res.send(results);
-      } else {
-        return res.send({ error: 'User not found' });
-      }
+      return res.send(results);
     }
   });
 });

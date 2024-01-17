@@ -121,17 +121,18 @@ const SignIn = () => {
               <button
                 type="submit"
                 className="w-full bg-blue-500 text-white p-2 rounded"
+                onSubmit={getDataFromServer}
               >
                 Sign In
               </button>
             </div>
             <div className="text-center">
-              <Link href="SignUp" className="text-blue-500" onChange={getDataFromServer}>
+              <Link href="SignUp" className="text-blue-500">
                 New user? Sign up here
               </Link>
             </div>
             <div className="text-center">
-              <Link href="missingIDPW" className="text-blue-500">
+              <Link href="searchUser" className="text-blue-500">
                 Forgot password or ID?
               </Link>
             </div>

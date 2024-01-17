@@ -3,6 +3,7 @@ import NavBar from "./navbars/NavBar";
 import Footer from "./Footer";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/router";
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,6 +13,7 @@ const Signup = () => {
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isUserNameValid, setIsUserNameValid] = useState(true);
   const [isNameValid, setIsNameValid] = useState(true);
+  const router = useRouter();
   const sendDataToServer = async (e: any) => {
     e.preventDefault();
     try {
@@ -21,13 +23,13 @@ const Signup = () => {
         username,
         name,
       });
-      console.log(response.config.data);
       if (response.data.sqlMessage === undefined) {
         alert("User Created Successfully");
         setEmail("");
         setPassword("");
         setUserName("");
         setName("");
+        router.push("SignIn");
         return;
       } else if (response.data.sqlMessage.includes("Duplicate entry")) {
         alert("User Already Exists");
@@ -231,7 +233,7 @@ const Signup = () => {
               <button
                 type="submit"
                 className="w-full bg-blue-500 text-white p-2 rounded"
-                onChange={sendDataToServer}
+                onSubmit={sendDataToServer}
               >
                 Sign Up
               </button>
