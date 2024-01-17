@@ -12,7 +12,6 @@ const searchUser = () => {
         name,
       });
       console.log(response);
-      console.log(name);
     } catch (error: any) {
       console.log(error);
     }
