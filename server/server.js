@@ -82,7 +82,7 @@ app.delete('/api/deleteuser', (req, res) => {
 });
 // search email and password by name
 app.post('/api/searchuser', (req, res) => {
-  const SEARCH_USER_QUERY = `SELECT email, password FROM users WHERE name = '${req.body.name}'`;
+  const SEARCH_USER_QUERY = `SELECT name, password FROM users WHERE email = '${req.body.email}'`;
   db.query(SEARCH_USER_QUERY, (err, results) => {
     if (err) {
       return res.send(err);
