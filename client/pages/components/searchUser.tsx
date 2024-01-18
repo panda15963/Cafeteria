@@ -4,13 +4,18 @@ import Footer from "./Footer";
 import NavBar from "./navbars/NavBar";
 const searchUser = () => {
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     try {
       const response = await axios.post(
         "http://localhost:3001/api/searchuser", { email });
-      console.log(response.data[0].password);
+      const password = response.data[0].password;
+      const name = response.data[0].name;
+      setName(name);
+      setPassword(password);
     } catch (error: any) {
       console.log(error);
     }
@@ -79,6 +84,10 @@ const searchUser = () => {
               />
               <p style={{ color: isEmailValid ? "" : "red" }}>
                 {isEmailValid ? "" : "Email is not valid or empty"}
+              </p>
+              <p style={{ color: password && name ? "blue" : "" }}>
+                {password ? "Password is " + password : ""} <br />
+                {name ? "Name is " + name : ""}
               </p>
             </div>
             <div className="mb-4">

@@ -7,10 +7,6 @@ type menus = {
 };
 const mainmenu: menus[] = [
   {
-    name: "Home",
-    link: "/",
-  },
-  {
     name: "Coffee Menu",
     link: "/components/coffeeMenu/mainPage",
   },
