@@ -133,12 +133,12 @@ const Signup = () => {
       <NavBar />
       <div className="min-h-screen flex items-center justify-center">
         <div className="bg-amber-100 p-8 rounded shadow-md w-96">
-          <h2 className="text-2xl mb-4 text-center">Sign Up</h2>
+          <h2 className="text-2xl mb-4 text-center font-bold">Sign Up</h2>
           <form method="post" onSubmit={sendDataToServer}>
             <div className="mb-4">
               <label
                 htmlFor="username"
-                className="block text-gray-600 text-sm font-medium mb-2"
+                className="block text-gray-600 text-sm font-medium mb-2 font-bold"
               >
                 Username
               </label>
@@ -162,7 +162,7 @@ const Signup = () => {
             <div className="mb-4">
               <label
                 htmlFor="name"
-                className="block text-gray-600 text-sm font-medium mb-2"
+                className="block text-gray-600 text-sm font-medium mb-2 font-bold"
               >
                 Full Name
               </label>
@@ -186,7 +186,7 @@ const Signup = () => {
             <div className="mb-4">
               <label
                 htmlFor="email"
-                className="block text-gray-600 text-sm font-medium mb-2"
+                className="block text-gray-600 text-sm font-medium mb-2 font-bold"
               >
                 Email
               </label>
@@ -208,7 +208,7 @@ const Signup = () => {
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="block text-gray-600 text-sm font-medium mb-2"
+                className="block text-gray-600 text-sm font-medium mb-2 font-bold"
               >
                 Password
               </label>

@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { useState } from "react";
+import { FaCartShopping } from "react-icons/fa6";
 import { useUser } from "../../contexts/UserContext";
+import Dropdown from "./Dropdown";
 type menus = {
   name?: string;
   link?: string;
@@ -15,14 +17,6 @@ const mainmenu: menus[] = [
     link: "/components/Locations",
   },
 ];
-const getUserName = () => {
-  const user_name = JSON.parse(localStorage.getItem("user") || "{}").name;
-  return user_name;
-};
-const getNickName = () => {
-  const user_name = JSON.parse(localStorage.getItem("user") || "{}").username;
-  return user_name;
-}
 const mainlistItems = mainmenu.map((data) => (
   <li className="mt-3 md:mt-0 md:ml-6" key={data.name}>
     <Link
@@ -35,7 +29,7 @@ const mainlistItems = mainmenu.map((data) => (
 ));
 const MenuDetails = () => {
   const { user, logout } = useUser();
-  const [isOpen, setIsOpen] = useState(false);
+  const [ isOpen, setIsOpen ] = useState(false);
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
@@ -47,20 +41,14 @@ const MenuDetails = () => {
           {user ? (
             <>
               <li className="mt-3 md:mt-0 md:ml-6" key="user">
-                <Link
-                  href="/components/Profile"
-                  className="block text-lg text-black hover:text-gray-500 bg-amber-100 font-bold"
-                >
-                  {getUserName()} ( {getNickName()} )
-                </Link>
+                <Dropdown />
               </li>
               <li className="mt-3 md:mt-0 md:ml-6" key="logout">
                 <Link
-                  href="/"
-                  onClick={logout}
-                  className="block text-lg text-black hover:text-gray-500 bg-amber-100 font-bold"
+                  href="/components/Cart"
+                  className="block text-xl py-2 text-black hover:text-gray-500 bg-amber-100 font-bold"
                 >
-                  Logout
+                  <FaCartShopping />
                 </Link>
               </li>
             </>

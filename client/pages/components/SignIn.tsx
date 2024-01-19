@@ -66,7 +66,7 @@ const SignIn = () => {
       <NavBar />
       <div className="min-h-screen flex items-center justify-center">
         <div className="bg-amber-100 p-8 rounded shadow-md w-96">
-          <h2 className="text-2xl mb-4 text-center">Sign In</h2>
+          <h2 className="text-2xl mb-4 text-center font-bold">Sign In</h2>
           <p className="text-center text-red-500">
             {isUserLoggedIn ? user_info + " user, welcome to our site" : isError ? "Email or password is incorrect" : ""}
           </p>
@@ -74,7 +74,7 @@ const SignIn = () => {
             <div className="mb-4">
               <label
                 htmlFor="email"
-                className="block text-gray-600 text-sm font-medium mb-2"
+                className="block text-gray-600 text-sm font-medium mb-2 font-bold"
               >
                 Email
               </label>
@@ -96,7 +96,7 @@ const SignIn = () => {
             <div className="mb-4">
               <label
                 htmlFor="password"
-                className="block text-gray-600 text-sm font-medium mb-2"
+                className="block text-gray-600 text-sm font-medium mb-2 font-bold"
               >
                 Password
               </label>

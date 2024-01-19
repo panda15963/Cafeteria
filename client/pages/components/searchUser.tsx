@@ -70,10 +70,10 @@ const searchUser = () => {
       <NavBar />
       <div className="min-h-screen flex items-center justify-center">
         <div className="bg-amber-100 p-8 rounded shadow-md w-96">
-          <h2 className="text-2xl mb-4 text-center">Search User</h2>
+          <h2 className="text-2xl mb-4 text-center font-bold">Search User</h2>
           <form method="post" onSubmit={handleSubmit}>
             <div className="mb-4">
-              <label className="block mb-2">Email</label>
+              <label className="block mb-2 font-bold">Email</label>
               <input
                 type="text"
                 placeholder="Enter your email"
@@ -85,9 +85,9 @@ const searchUser = () => {
               <p style={{ color: isEmailValid ? "" : "red" }}>
                 {isEmailValid ? "" : "Email is not valid or empty"}
               </p>
-              <p style={{ color: password && name ? "blue" : "" }}>
-                {password ? "Password is " + password : ""} <br />
-                {name ? "Name is " + name : ""}
+              <p className="text-blue-500 font-bold" style={{ color: password && name ? "blue" : "" }}>
+                Password : {password ? password : ""} <br />
+                Name : {name ? name : ""}
               </p>
             </div>
             <div className="mb-4">
