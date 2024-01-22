@@ -60,34 +60,28 @@ export default class SimpleSlider extends Component {
       infinite: true,
       autoplay: true,
       autoplaySpeed: 3000,
-      arrows : true,
+      arrows: true,
       fade: true,
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />,
     };
     return (
-      <div className="content">
-        <h1 className="header">Afro Styles Fashion Store</h1>
-        <div className="container">
-          <Slider {...settings}>
-            {data.map((item) => (
-              <div key={item.id}>
-                <div className="img-body">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    width={1000}
-                    height={500}
-                  />
-                </div>
-                <div>
-                  <h2>{item.title}</h2>
-                  <p>{item.description}</p>
-                </div>
+      <div className="container">
+        <Slider {...settings}>
+          {data.map((item) => (
+            <div key={item.id}>
+              <div className="img-body">
+                <img
+                  className="img-fluid h-100"
+                  src={item.image}
+                  alt={item.title}
+                />
+                <h2>{item.title}</h2>
+                <p>{item.description}</p>
               </div>
-            ))}
-          </Slider>
-        </div>
+            </div>
+          ))}
+        </Slider>
       </div>
     );
   }

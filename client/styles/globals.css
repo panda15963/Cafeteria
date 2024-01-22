@@ -1,36 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
-    margin: 0 auto;
-    padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-    color: rgb(52, 48, 48)
-  }
-  
-  .content {
-    text-align: center;
-  }
-  .header {
-    font-size: 30px;
-  }
-  
-  .img-body img {
-    display: flex;
-    object-fit: cover;
-    position: relative;
-  }
-  
-  .img-body {
-    display: inline-block;
-  }
-  
-  .container {
-    margin: 0 auto;
-    width: 100%;
-    border-color: white;
-  }
-  .rotate-180 {
-    transform: rotate(180deg);
-  }
+  margin: 0 auto;
+  padding: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+  color: rgb(52, 48, 48)
+}
+
+.container {
+  margin: auto;
+  text-align: center;
+}
+
+.img-body img {
+  display: flex;
+  object-fit: cover;
+  position: relative;
+}
+
+.img-body {
+  display: inline-block;
+}
+
+.img-body h2 {
+  position: absolute;
+  color: rgb(255, 166, 0);
+  font-size: 50px;
+  font-weight: 600;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 2px 2px 4px #000000;
+}
+
+.img-body p {
+  position: absolute;
+  color: rgb(255, 166, 0);
+  font-size: 15px;
+  font-weight: 600;
+  top: 58%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-shadow: 2px 2px 4px #000000;
+}
+
+.rotate-180 {
+  transform: rotate(180deg);
+}
