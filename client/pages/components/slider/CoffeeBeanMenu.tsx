@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import data from "./slidingData";
-import Image from "next/image";
+import data from "./CoffeeBeanMenuData";
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
   return (
@@ -50,34 +49,32 @@ function SamplePrevArrow(props: any) {
     </div>
   );
 }
-export default class SimpleSlider extends Component {
+export default class CoffeeBeanMenu extends Component {
   render() {
     const settings = {
       dots: true,
       speed: 500,
-      slidesToShow: 1,
+      slidesToShow: 5,
       slidesToScroll: 1,
       infinite: true,
       autoplay: true,
       autoplaySpeed: 3000,
       arrows: true,
-      fade: true,
       nextArrow: <SampleNextArrow />,
       prevArrow: <SamplePrevArrow />,
     };
     return (
       <div className="container">
+        <h1 className="text-center text-4xl font-bold">Coffee Bean Menu</h1>
         <Slider {...settings}>
-          {data.map((item) => (
+          {data.map((item: any) => (
             <div key={item.id}>
-              <div className="img-body">
-                <img
-                  className="img-fluid h-100"
-                  src={item.image}
-                  alt={item.title}
-                />
-                <h2>{item.title}</h2>
-                <p>{item.description}</p>
+              <div className="coffee-bean-menu">
+                <div className="border-b-4 border-gray-500">
+                  <img src={item.image} alt={item.name} />
+                </div>
+                <h3>{item.name}</h3>
+                <p>${item.price}</p>
               </div>
             </div>
           ))}

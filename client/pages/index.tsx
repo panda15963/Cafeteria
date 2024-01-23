@@ -1,13 +1,15 @@
 import React from "react"
 import NavBar from "./components/navbars/NavBar"
 import Footer from "./components/Footer"
-import ImageSlider from "./components/slider/ImageSlider"
+import NoticeManu from "./components/slider/NoticeMenu"
+import CoffeeBeanMenu from "./components/slider/CoffeeBeanMenu"
 
 export default function Home() {
   return (
     <>
       <NavBar />
-      <ImageSlider />
+      <NoticeManu />
+      <CoffeeBeanMenu />
       <Footer />
     </>
   )
