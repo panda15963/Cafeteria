@@ -9,8 +9,8 @@ type menus = {
 };
 const mainmenu: menus[] = [
   {
-    name: "Coffee Menu",
-    link: "/components/coffeeMenu/mainPage",
+    name: "Coffee Beans",
+    link: "/components/CoffeeBeanMenu",
   },
   {
     name: "Locations",
@@ -28,7 +28,7 @@ const mainlistItems = mainmenu.map((data) => (
   </li>
 ));
 const MenuDetails = () => {
-  const { user, logout } = useUser();
+  const { user } = useUser();
   const [ isOpen, setIsOpen ] = useState(false);
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
