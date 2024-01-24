@@ -90,5 +90,26 @@ export const coffeeBeanMenu = [
       description: 'Kenya Peaberry',
       price: 6.75,
     },
+    {
+      id: 14,
+      name: 'Cosorong Blend',
+      image: '/Image/coffeeBeanMenu/cosorong_blend.jpg',
+      description: 'Cosorong Blend',
+      price: 5.61,
+    },
+    {
+      id: 15,
+      name: 'Orotsee Blend',
+      image: '/Image/coffeeBeanMenu/orotsee_blend.jpg',
+      description: 'Orotsee Blend',
+      price: 6.0,
+    },
+    {
+      id: 16,
+      name: 'Dark Blend',
+      image: '/Image/coffeeBeanMenu/dark_blend.jpg',
+      description: 'Dark Blend',
+      price: 5.24,
+    },
 ]
 export default coffeeBeanMenu;

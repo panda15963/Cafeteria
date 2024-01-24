@@ -10,7 +10,7 @@ type menus = {
 const mainmenu: menus[] = [
   {
     name: "Coffee Beans",
-    link: "/components/CoffeeBeanMenu",
+    link: "/components/menudetails/CoffeeBeanMenu",
   },
   {
     name: "Locations",
