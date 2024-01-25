@@ -15,7 +15,7 @@ const CoffeeBeanMenu = () => {
         <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
           {CoffeeBeanMenuData.map((item, index) => {
             return (
-              <Link href={`/menudetails/${item.id}`}>
+              <Link href={`/menudetails/${item.name}`}>
                   <Card
                     key={index}
                     shadow="lg"
