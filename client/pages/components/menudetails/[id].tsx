@@ -58,17 +58,19 @@ const ProductDetails = () => {
                   </tr>
                 </tbody>
               </table>
+              <main className="flex justify-center py-5">
+                <Link href="/components/menudetails/CoffeeBeanMenu">
+                  <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full">
+                    Add to Cart
+                  </button>
+                </Link>
+                <Link href="/components/menudetails/CoffeeBeanMenu" className="px-5">
+                  <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full">
+                    Buy Now
+                  </button>
+                </Link>
+              </main>
             </main>
-          </div>
-          <div className="flex justify-center">
-            <p className="text-2xl font-bold mt-10 mb-10">${product.price}</p>
-          </div>
-          <div className="flex justify-center">
-            <Link href="/components/menudetails/CoffeeBeanMenu">
-              <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full">
-                Back
-              </button>
-            </Link>
           </div>
         </div>
         <Footer />

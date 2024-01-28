@@ -33,7 +33,7 @@ const CoffeeBeanMenu = () => {
                     </CardBody>
                     <CardFooter className="text-small justify-between">
                       <b>{item.name}</b>
-                      <p className="text-default-500">${item.price}</p>
+                      <p className="text-default-500 font-bold">${item.price}</p>
                     </CardFooter>
                   </Card>
               </Link>
