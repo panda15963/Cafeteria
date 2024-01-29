@@ -4,7 +4,7 @@ export const coffeeBeanMenu = [
         name: 'Brazil Cerrado',
         image: '/Image/coffeeBeanMenu/brazil_cerrado.jpg',
         description: {
-          meaning: 'Cerrado is a type of coffee bean that is grown in the Cerrado region of Brazil. It is named after the Cerrado region of Brazil.',
+          description: 'Cerrado is a type of coffee bean that is grown in the Cerrado region of Brazil. It is named after the Cerrado region of Brazil.',
           origin: 'Brazil',
           region: 'Cerrado',
           process: 'Natural',
@@ -13,13 +13,14 @@ export const coffeeBeanMenu = [
           harvest_time: 'May - November',
           grade: 'NY2, SC 17/18, FC',
           tasting_map: {
-            acidity: 3/5,
-            body: 3/5,
+            acidity: 3/5 * 100,
+            body: 3/5 * 100,
             sweetness: 3/5,
             flavor: 3/5,
             bitterness: 2/5,
           },
           roasting_point: '/Image/roastingPoint/brazil_cerrado.jpg',
+          region_map: '/Image/regionMap/brazil_cerrado.jpg',
         },
         price: 4.87,        
     },
@@ -28,7 +29,7 @@ export const coffeeBeanMenu = [
         name: 'Brazil Yellow Bourbon',
         image: '/Image/coffeeBeanMenu/brazil_yellow_bourbon.jpg',
         description: {
-          meaning: 'Yellow Bourbon is a type of coffee bean that is grown in the Sul De Minas region of Brazil. It is named after the Bourbon region of Brazil.',
+          description: 'Yellow Bourbon is a type of coffee bean that is grown in the Sul De Minas region of Brazil. It is named after the Bourbon region of Brazil.',
           origin: 'Brazil',
           region: 'Sul De Minas',
           process: 'Pulped Natural',
@@ -53,7 +54,7 @@ export const coffeeBeanMenu = [
       name: 'Colombia Supremo',
       image: '/Image/coffeeBeanMenu/colombia_supremo.jpg',
       description: {
-        meaning: 'Supremo is a type of coffee bean that is grown in the Huila region of Colombia. It is named after the Supremo region of Colombia.',
+        description: 'Supremo is a type of coffee bean that is grown in the Huila region of Colombia. It is named after the Supremo region of Colombia.',
         origin: 'Colombia',
         region: 'Caldas, Risaralda',
         process: 'Washed',
@@ -77,7 +78,7 @@ export const coffeeBeanMenu = [
       name: 'Costa Rica Tarrazu',
       image: '/Image/coffeeBeanMenu/costa_rica_tarrazu.jpg',
       description: {
-        meaning: 'Tarrazu is a type of coffee bean that is grown in the Tarrazu region of Costa Rica. It is named after the Tarrazu region of Costa Rica.',
+        description: 'Tarrazu is a type of coffee bean that is grown in the Tarrazu region of Costa Rica. It is named after the Tarrazu region of Costa Rica.',
         origin: 'Costa Rica',
         region: 'Tarrazu',
         process: 'Fully Washed, Machine-Dried',
@@ -102,7 +103,7 @@ export const coffeeBeanMenu = [
       name: 'Ethiopia Konga',
       image: '/Image/coffeeBeanMenu/ethiopia_konga.jpg',
       description: {
-        meaning: 'Konga is a type of coffee bean that is grown in the Konga region of Ethiopia. It is named after the Konga region of Ethiopia.',
+        description: 'Konga is a type of coffee bean that is grown in the Konga region of Ethiopia. It is named after the Konga region of Ethiopia.',
         origin: 'Ethiopia',
         region: 'Gedeo, Yirgacheffe',
         process: 'Washed, Sun-Dried',
@@ -126,7 +127,7 @@ export const coffeeBeanMenu = [
       name: 'Ethiopia Sidamo G2',
       image: '/Image/coffeeBeanMenu/ethiopia_sidamo_g2.jpg',
       description: {
-        meaning: 'Sidamo is a type of coffee bean that is grown in the Sidamo region of Ethiopia. It is named after the Sidamo people who produce and export coffee beans in the Sidamo region of Ethiopia.',
+        description: 'Sidamo is a type of coffee bean that is grown in the Sidamo region of Ethiopia. It is named after the Sidamo people who produce and export coffee beans in the Sidamo region of Ethiopia.',
         origin: 'Ethiopia',
         region: 'Sidamo',
         process: 'Washed',
@@ -150,7 +151,7 @@ export const coffeeBeanMenu = [
       name: 'Ethiopia Yirgacheffe G2',
       image: '/Image/coffeeBeanMenu/ethiopia_yirgacheffe_g2.jpg',
       description: {
-        meaning: 'Yirgacheffe is a type of coffee bean that is grown in the Yirgacheffe region of Ethiopia. It is named after the town of Yirgacheffe in Ethiopia.',
+        description: 'Yirgacheffe is a type of coffee bean that is grown in the Yirgacheffe region of Ethiopia. It is named after the town of Yirgacheffe in Ethiopia.',
         origin: 'Ethiopia',
         region: 'Yirgacheffe',
         process: 'Washed',
@@ -175,7 +176,7 @@ export const coffeeBeanMenu = [
       name: 'Guatemala Antigua',
       image: '/Image/coffeeBeanMenu/guatemala_antigua.jpg',
       description: {
-        meaning: 'Antigua is a type of coffee bean that is grown in the Antigua region of Guatemala. It is named after the city of Antigua in Guatemala.',
+        description: 'Antigua is a type of coffee bean that is grown in the Antigua region of Guatemala. It is named after the city of Antigua in Guatemala.',
         origin: 'Guatemala',
         region: 'Antigua',
         process: 'Washed',
@@ -201,7 +202,7 @@ export const coffeeBeanMenu = [
       name: 'India Monsooned Malabar AA',
       image: '/Image/coffeeBeanMenu/india_monsoon_malabar_AA.jpg',
       description: {
-        meaning: 'Monsooned Malabar is a type of coffee bean that is grown in the south of India. It is named after the Malabar Coast of India where the coffee beans are exposed to the monsoon winds of the Arabian Sea.',
+        description: 'Monsooned Malabar is a type of coffee bean that is grown in the south of India. It is named after the Malabar Coast of India where the coffee beans are exposed to the monsoon winds of the Arabian Sea.',
         origin: 'India',
         region: 'Malabar',
         process: 'Sun-dried',
@@ -225,7 +226,7 @@ export const coffeeBeanMenu = [
       name: 'India Mysoore Nuggets',
       image: '/Image/coffeeBeanMenu/india_mysore_nuggets_extra_bold.jpg',
       description: {
-        meaning: 'Mysoore is a type of coffee bean that is grown in the south of India. It is named after the city of Mysore in Karnataka, India.',
+        description: 'Mysoore is a type of coffee bean that is grown in the south of India. It is named after the city of Mysore in Karnataka, India.',
         origin: 'India',
         region: 'Chikmagalure, Giri, Manjarabad',
         process: 'Washed',
@@ -249,7 +250,7 @@ export const coffeeBeanMenu = [
       name: 'Indonesia Sumatra Mandheling',
       image: '/Image/coffeeBeanMenu/indonesia_mandheling_g1.jpg',
       description: {
-        meaning: 'Mandheling is a type of coffee bean that is grown in the north of Sumatra, Indonesia. It is named after the Mandailing people who produce and export coffee beans in the Tapanuli region of Sumatra.',
+        description: 'Mandheling is a type of coffee bean that is grown in the north of Sumatra, Indonesia. It is named after the Mandailing people who produce and export coffee beans in the Tapanuli region of Sumatra.',
         origin: 'Indonesia',
         region: 'Sumatra',
         process: 'Wet-Hulled',
@@ -274,7 +275,7 @@ export const coffeeBeanMenu = [
       name: 'Kenya AA',
       image: '/Image/coffeeBeanMenu/kenya_AA.jpg',
       description: {
-        meaning: 'AA is the highest grade of Kenyan coffee based on the size of the bean. AA is the largest bean size and AB is the second largest.',
+        description: 'AA is the highest grade of Kenyan coffee based on the size of the bean. AA is the largest bean size and AB is the second largest.',
         origin: 'Kenya',
         region: 'Kiambu',
         process: 'Washed',
@@ -298,7 +299,7 @@ export const coffeeBeanMenu = [
       name: 'Kenya Peaberry',
       image: '/Image/coffeeBeanMenu/kenya_peaberry.jpg',
       description: {
-        meaning: 'Peaberry is a type of coffee bean that is round and small. It is a natural mutation of the coffee bean that occurs inside the coffee cherry so only one bean is produced inside the cherry instead of the usual two.',
+        description: 'Peaberry is a type of coffee bean that is round and small. It is a natural mutation of the coffee bean that occurs inside the coffee cherry so only one bean is produced inside the cherry instead of the usual two.',
         origin: 'Kenya',
         region: 'Kiambu',
         process: 'Washed',
@@ -322,7 +323,7 @@ export const coffeeBeanMenu = [
       name: 'Cosorong Blend',
       image: '/Image/coffeeBeanMenu/cosorong_blend.jpg',
       description: {
-        meaning: 'Cosorong means "Aromatic" in Korean and it is a blend of more than 2 different beans from more than 2 different countries.',
+        description: 'Cosorong means "Aromatic" in Korean and it is a blend of more than 2 different beans from more than 2 different countries.',
         origin: 'N/A',
         region: 'N/A',
         process: 'N/A',
@@ -347,7 +348,7 @@ export const coffeeBeanMenu = [
       name: 'Orotsee Blend',
       image: '/Image/coffeeBeanMenu/orotsee_blend.jpg',
       description: {
-        meaning: 'Orotsee means "Fully intact" in Korean and it is a blend of more than 2 different beans from more than 2 different countries.',
+        description: 'Orotsee means "Fully intact" in Korean and it is a blend of more than 2 different beans from more than 2 different countries.',
         origin: 'N/A',
         region: 'N/A',
         process: 'N/A',
@@ -373,7 +374,7 @@ export const coffeeBeanMenu = [
       name: 'Dark Blend',
       image: '/Image/coffeeBeanMenu/dark_blend.jpg',
       description: {
-        meaning: 'Dark Blend tastes like savory dark chocolate and it is a blend of more than 2 different beans from more than 2 different countries.',
+        description: 'Dark Blend tastes like savory dark chocolate and it is a blend of more than 2 different beans from more than 2 different countries.',
         origin: 'N/A',
         region: 'N/A',
         process: 'N/A',
