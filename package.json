@@ -3,6 +3,8 @@
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/material": "^5.15.6",
-    "@nextui-org/react": "^2.2.9"
+    "@nextui-org/react": "^2.2.9",
+    "antd": "^5.13.3",
+    "framer-motion": "^11.0.3"
   }
 }

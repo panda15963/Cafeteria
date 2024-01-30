@@ -7,11 +7,11 @@ import { NextUIProvider } from "@nextui-org/react";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <UserProvider>
-      <NextUIProvider>
+    <NextUIProvider>
+      <UserProvider>
         <Component {...pageProps} />
-      </NextUIProvider>
-    </UserProvider>
+      </UserProvider>
+    </NextUIProvider>
   );
 }
 
