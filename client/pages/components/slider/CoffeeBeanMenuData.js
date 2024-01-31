@@ -22,7 +22,13 @@ export const coffeeBeanMenu = [
           roasting_point: '/Image/roastingPoint/brazil_cerrado.jpg',
           region_map: '/Image/regionMap/brazil_cerrado.jpg',
         },
-        price: 4.87,        
+        price: 4.87,
+        nodtification: {
+          title: 'Brazil Cerrado',
+          description: 'This coffee bean is grown in the Cerrado region of Brazil, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+          alt: 'First Notification',
+          image: '/Image/noticeMenu/coffeeBeans1.jpg',
+        },        
     },
     {
         id: 2,
@@ -47,7 +53,13 @@ export const coffeeBeanMenu = [
           roasting_point: '/Image/roastingPoint/brazil_yellow_bourbon.jpg',
           region_map: '/Image/regionMap/brazil_yellow_bourbon.jpg',
         },
-        price: 6.0,        
+        price: 6.0,
+        nodtification: {
+          title: 'Brazil Yellow Bourbon',
+          description: 'This coffee bean is grown in the Sul De Minas region of Brazil, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+          alt: 'First Notification',
+          image: '/Image/noticeMenu/coffeeBeans2.jpg',
+        },        
     },
     {
       id: 3,
@@ -72,7 +84,13 @@ export const coffeeBeanMenu = [
         roasting_point: '/Image/roastingPoint/colombia_supremo.jpg',
         region_map: '/Image/regionMap/colombia_supremo.jpg',
       },
-      price: 5.62,      
+      price: 5.62, 
+      notification: {
+        title: 'Colombia Supremo',
+        description: 'This coffee bean is grown in the Huila region of Colombia, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans3.jpg',
+      },     
     },
     {
       id: 4,
@@ -97,7 +115,13 @@ export const coffeeBeanMenu = [
         roasting_point: '/Image/roastingPoint/costa_rica_tarrazu.jpg',
         region_map: '/Image/regionMap/costa_rica_tarrazu.jpg',      
       },
-      price: 6.37,      
+      price: 6.37,   
+      notification: {
+        title: 'Costa Rica Tarrazu',
+        description: 'This coffee bean is grown in the Tarrazu region of Costa Rica, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans4.jpg',
+      },   
     },
     {
       id: 5,
@@ -122,7 +146,13 @@ export const coffeeBeanMenu = [
         roasting_point: '/Image/roastingPoint/ethiopia_konga.jpg',
         region_map: '/Image/regionMap/ethiopia_konga.jpg',
       },
-      price: 11.62,      
+      price: 11.62,
+      notification: {
+        title: 'Ethiopia Konga',
+        description: 'This coffee bean is grown in the Konga region of Ethiopia, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans5.jpg',
+      },      
     },
     {
       id: 6,

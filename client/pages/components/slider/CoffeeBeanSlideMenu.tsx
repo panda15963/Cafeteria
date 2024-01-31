@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
 import data from "./CoffeeBeanMenuData";
+import Link from "next/link";
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
   return (
@@ -68,7 +69,7 @@ export default class CoffeeBeanMenu extends Component {
         <h1 className="text-center text-4xl font-bold">Coffee Bean Menu</h1>
         <Slider {...settings}>
           {data.map((item: any) => (
-            <div key={item.id}>
+            <Link key={item.id} href={`/components/menudetails/${item.name}`}>
               <div className="coffee-bean-menu">
                 <div className="border-b-4 border-gray-500">
                   <img src={item.image} alt={item.name} />
@@ -76,7 +77,7 @@ export default class CoffeeBeanMenu extends Component {
                 <h3>{item.name}</h3>
                 <p>${item.price}</p>
               </div>
-            </div>
+            </Link>
           ))}
         </Slider>
       </div>
