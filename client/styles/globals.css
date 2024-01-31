@@ -27,24 +27,24 @@ body {
 }
 
 .img-body h2 {
-  position: absolute;
+  position: relative;
   color: rgb(255, 165, 0);
   font-size: 40px;
   font-weight: 600;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -500%);
   text-shadow: 2px 2px 4px #000000;
 }
 
 .img-body p {
-  position: absolute;
+  position: relative;
   color: rgb(255, 165, 0);
   font-size: 15px;
   font-weight: 600;
   top: 65%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -1200%);
   text-shadow: 2px 2px 4px #000000;
 }
 

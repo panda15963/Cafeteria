@@ -23,7 +23,7 @@ export const coffeeBeanMenu = [
           region_map: '/Image/regionMap/brazil_cerrado.jpg',
         },
         price: 4.87,
-        nodtification: {
+        notification: {
           title: 'Brazil Cerrado',
           description: 'This coffee bean is grown in the Cerrado region of Brazil, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
           alt: 'First Notification',
@@ -54,7 +54,7 @@ export const coffeeBeanMenu = [
           region_map: '/Image/regionMap/brazil_yellow_bourbon.jpg',
         },
         price: 6.0,
-        nodtification: {
+        notification: {
           title: 'Brazil Yellow Bourbon',
           description: 'This coffee bean is grown in the Sul De Minas region of Brazil, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
           alt: 'First Notification',
@@ -177,7 +177,13 @@ export const coffeeBeanMenu = [
         roasting_point: '/Image/roastingPoint/ethiopia_sidamo_g2.jpg',
         region_map: '/Image/regionMap/ethiopia_sidamo_g2.jpg',
       },
-      price: 6.0,       
+      price: 6.0,
+      notification: {
+        title: 'Ethiopia Sidamo G2',
+        description: 'This coffee bean is grown in the Sidamo region of Ethiopia, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans6.jpg',
+      },
     },
     {
       id: 7,
@@ -202,7 +208,13 @@ export const coffeeBeanMenu = [
         roasting_point: '/Image/roastingPoint/ethiopia_yirgacheffe_g2.jpg',
         region_map: '/Image/regionMap/ethiopia_yirgacheffe_g2.png',      
       },
-      price: 6.37,      
+      price: 6.37,
+      notification: {
+        title: 'Ethiopia Yirgacheffe G2',
+        description: 'This coffee bean is grown in the Yirgacheffe region of Ethiopia, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans7.jpg',
+      },
     },
     {
       id: 8,
@@ -227,7 +239,13 @@ export const coffeeBeanMenu = [
         roasting_point: '/Image/roastingPoint/guatemala_antigua.jpg',
         region_map: '/Image/regionMap/guatemala_antigua.jpg',
       },
-      price: 6.37,      
+      price: 6.37,
+      notification: {
+        title: 'Guatemala Antigua',
+        description: 'This coffee bean is grown in the Antigua region of Guatemala, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans8.jpg',
+      },
     },
     {
       id: 9,
@@ -252,7 +270,13 @@ export const coffeeBeanMenu = [
         roasting_point: '/Image/roastingPoint/india_monsoon_malabar_AA.jpg',
         region_map: '/Image/regionMap/india_monsoon_malabar_AA.jpg',
       },
-      price: 6.0,    
+      price: 6.0,
+      notification: {
+        title: 'India Monsooned Malabar AA',
+        description: 'This coffee bean is grown in the Malabar region of India, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans9.jpg',
+      },    
     },
     {
       id: 10,
@@ -277,7 +301,13 @@ export const coffeeBeanMenu = [
         roasting_point: '/Image/roastingPoint/india_mysore_nuggets_extra_bold.jpg',
         region_map: '/Image/regionMap/india_mysore_nuggets_extra_bold.png',
       },
-      price: 6.0,      
+      price: 6.0,
+      notification: {
+        title: 'India Mysoore Nuggets',
+        description: 'This coffee bean is grown in the Mysore region of India, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans10.jpg',
+      },      
     },
     {
       id: 11,
@@ -302,7 +332,13 @@ export const coffeeBeanMenu = [
         roasting_point: '/Image/roastingPoint/indonesia_mandheling_g1.jpg',
         region_map: '/Image/regionMap/indonesia_mandheling_g1.png',      
       },
-      price: 7.12,      
+      price: 7.12,
+      notification: {
+        title: 'Indonesia Sumatra Mandheling',
+        description: 'This coffee bean is grown in the Mandheling region of Indonesia, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans11.jpg',
+      },      
     },
     {
       id: 12,
@@ -327,7 +363,13 @@ export const coffeeBeanMenu = [
         roasting_point: '/Image/roastingPoint/kenya_AA.jpg',
         region_map: '/Image/regionMap/kenya_AA.jpg',
       },
-      price: 8.24,      
+      price: 8.24,
+      notification: {
+        title: 'Kenya AA',
+        description: 'This coffee bean is grown in the Kiambu region of Kenya, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans12.jpg',
+      },      
     },
     {
       id: 13,
@@ -353,6 +395,12 @@ export const coffeeBeanMenu = [
         region_map: '/Image/regionMap/kenya_peaberry.jpg',
       },
       price: 6.75,
+      notification: {
+        title: 'Kenya Peaberry',
+        description: 'This coffee bean is grown in the Kiambu region of Kenya, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans13.jpg',
+      },
     },
     {
       id: 14,
@@ -378,6 +426,12 @@ export const coffeeBeanMenu = [
         region_map: '/Image/regionMap/cosorong_blend.jpg',      
       },
       price: 5.61,
+      notification: {
+        title: 'Cosorong Blend',
+        description: 'This coffee bean is grown in the Cosorong region of Korea, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans14.jpg',
+      },
     },
     {
       id: 15,
@@ -403,6 +457,12 @@ export const coffeeBeanMenu = [
         region_map: '/Image/regionMap/orotsee_blend.jpg',
       },
       price: 6.0,
+      notification: {
+        title: 'Orotsee Blend',
+        description: 'This coffee bean is grown in the Orotsee region of Korea, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans15.jpg',
+      },
     },
     {
       id: 16,
@@ -428,6 +488,12 @@ export const coffeeBeanMenu = [
         region_map: '/Image/regionMap/dark_blend.jpg',
       },
       price: 5.24,
+      notification: {
+        title: 'Dark Blend',
+        description: 'This coffee bean is grown in the Dark region of Korea, which is famous for its coffee. It tastes sweet as caramel and savory nut scents.',
+        alt: 'First Notification',
+        image: '/Image/noticeMenu/coffeeBeans16.jpg',
+      },
     },
 ]
 export default coffeeBeanMenu;

@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-import data from "./NoticeMenuData";
+import data from "./CoffeeBeanMenuData";
 import Link from "next/link";
 function SampleNextArrow(props: any) {
   const { className, style, onClick } = props;
@@ -60,27 +60,29 @@ const NoticeMenu = () => {
     autoplay: true,
     autoplaySpeed: 3000,
     arrows: true,
-    fade: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
+  console.log(data);
   return (
     <div className="container">
       <h1 className="text-center text-4xl font-bold py-3">Notification Menu</h1>
       <Slider {...settings}>
-        {data.map((item: any) => (
-          <Link key={item.id} href={`/components/menudetails/${item.title}`}>
+        {data.map((data) => {
+          return (
+            <Link key={data.id} href={`/components/menudetails/${data.name}`}>
             <div className="img-body">
               <img
-                className="img-fluid h-100 w-100"
-                src={item.image}
-                alt={item.title}
+                className="img-fluid w-100"
+                src={data.notification.image}
+                alt={data.notification.alt}
               />
-                <h2>{item.title}</h2>
-                <p>{item.description}</p>
+                <h2>{data.notification.title}</h2>
+                <p>{data.notification.description}</p>
             </div>
           </Link>
-        ))}
+          );
+        })}
       </Slider>
     </div>
   );
