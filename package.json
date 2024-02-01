@@ -6,6 +6,7 @@
     "@nextui-org/react": "^2.2.9",
     "antd": "^5.13.3",
     "framer-motion": "^11.0.3",
+    "next-auth": "^4.24.5",
     "swiper": "^11.0.5"
   }
 }

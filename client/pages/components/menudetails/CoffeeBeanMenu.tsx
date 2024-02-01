@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import NavBar from "../navbars/NavBar";
 import Footer from "../Footer";
-import CoffeeBeanMenuData from "../slider/CoffeeBeanMenuData";
+import data from "../slider/CoffeeBeanMenuData";
 import Link from "next/link";
 const CoffeeBeanMenu = () => {
   return (
@@ -13,11 +13,10 @@ const CoffeeBeanMenu = () => {
           Coffee Bean Menu
         </h1>
         <div className="gap-2 grid grid-cols-2 sm:grid-cols-4">
-          {CoffeeBeanMenuData.map((item, index) => {
+          {data.map((item) => {
             return (
               <Link key={item.id} href={`/components/menudetails/${item.name}`}>
                   <Card
-                    key={index}
                     shadow="lg"
                     isPressable
                     className="border-4 border-black rounded-md shadow-lg"

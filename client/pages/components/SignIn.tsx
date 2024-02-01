@@ -40,7 +40,7 @@ const SignIn = () => {
       console.log(error);
     }
   };
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     switch (name) {
       case "email":

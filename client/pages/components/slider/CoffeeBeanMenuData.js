@@ -20,7 +20,7 @@ export const coffeeBeanMenu = [
             bitterness: 2/5 * 100,
           },
           roasting_point: '/Image/roastingPoint/brazil_cerrado.jpg',
-          region_map: '/Image/regionMap/brazil_cerrado.jpg',
+          region_map: '/Image/regionMap/brazil_cerrado.png',
         },
         price: 4.87,
         notification: {
