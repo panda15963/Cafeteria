@@ -1,19 +1,37 @@
-import React from "react";
+import React, { use } from "react";
 import Link from "next/link";
 import CoffeeBeanMenu from "../slider/CoffeeBeanMenuData";
 import NavBar from "../navbars/NavBar";
 import Footer from "../Footer";
 import { useRouter } from "next/router";
 import { Progress } from "@nextui-org/progress";
+import { useUser } from "../../contexts/UserContext";
+import { useCart } from "../../contexts/CartContext";
 const ProductDetails = () => {
   const router = useRouter();
   const { id } = router.query;
   const product = CoffeeBeanMenu.find((item) => item.name === id);
   const date = new Date();
+  const user = useUser();
+  const cart = useCart();
+  const average_tasingMap = (tasting_map: any) => {
+    let sum = 0;
+    for (let key in tasting_map) {
+      sum += tasting_map[key];
+    }
+    return sum / 5;
+  }
+  console.log(average_tasingMap(product?.description.tasting_map));
   const add_cart = () => {
-    console.log("add_cart");
+    if (user.isLogin === false && user.user === null) {
+      alert("Please sign in first!");
+      router.push("/components/SignIn");
+    } else {
+      alert("Added to Cart!");
+      console.log(cart);
+    }
   };
-  return (
+  return (    
     <div>
       <NavBar />
       <div className="container">

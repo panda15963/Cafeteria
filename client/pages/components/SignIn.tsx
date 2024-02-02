@@ -35,9 +35,13 @@ const SignIn = () => {
         router.push("/");
       } else {
         setIsError(true);
+        setEmail("");
+        setPassword("");
       }
     } catch (error: any) {
       console.log(error);
+      setEmail("");
+      setPassword("");
     }
   };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

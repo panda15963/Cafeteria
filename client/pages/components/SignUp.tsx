@@ -46,6 +46,10 @@ const Signup = () => {
       setName("");
     } catch (error) {
       console.log(error);
+      setEmail("");
+      setPassword("");
+      setUserName("");
+      setName("");
     }
   };
   const handleChange = (e: any) => {

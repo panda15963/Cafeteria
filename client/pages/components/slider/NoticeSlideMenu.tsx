@@ -63,7 +63,6 @@ const NoticeMenu = () => {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
-  console.log(data);
   return (
     <div className="container">
       <h1 className="text-center text-4xl font-bold py-3">Notification Menu</h1>

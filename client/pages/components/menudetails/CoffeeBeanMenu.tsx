@@ -18,7 +18,6 @@ const CoffeeBeanMenu = () => {
               <Link key={item.id} href={`/components/menudetails/${item.name}`}>
                   <Card
                     shadow="lg"
-                    isPressable
                     className="border-4 border-black rounded-md shadow-lg"
                   >
                     <CardBody className="overflow-visible p-0 border-b-2 border-black">
