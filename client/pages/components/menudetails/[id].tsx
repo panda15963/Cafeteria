@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React from "react";
 import Link from "next/link";
 import CoffeeBeanMenu from "../slider/CoffeeBeanMenuData";
 import NavBar from "../navbars/NavBar";
@@ -13,7 +13,7 @@ const ProductDetails = () => {
   const product = CoffeeBeanMenu.find((item) => item.name === id);
   const date = new Date();
   const user = useUser();
-  const cart = useCart();
+  const { addToCart } = useCart();
   const average_tasingMap = (tasting_map: any) => {
     let sum = 0;
     for (let key in tasting_map) {
@@ -21,14 +21,15 @@ const ProductDetails = () => {
     }
     return sum / 5;
   }
-  console.log(average_tasingMap(product?.description.tasting_map));
+  console.log(addToCart(product?.name));
   const add_cart = () => {
-    if (user.isLogin === false && user.user === null) {
+    if (user.user === null) {
       alert("Please sign in first!");
       router.push("/components/SignIn");
     } else {
       alert("Added to Cart!");
-      console.log(cart);
+      addToCart(product?.name);
+      alert(addToCart(product?.name));
     }
   };
   return (    
@@ -232,6 +233,23 @@ const ProductDetails = () => {
                             value: "text-foreground/60",
                           }}
                           label="Flavor"
+                          radius="sm"
+                          showValueLabel={true}
+                        />
+                        <Progress
+                          value={average_tasingMap(product?.description.tasting_map)}
+                          maxValue={100}
+                          size="md"
+                          classNames={{
+                            base: "max-w-md",
+                            track: "drop-shadow-md border border-default",
+                            indicator:
+                              "bg-gradient-to-r from-yellow-400 to-yellow-800",
+                            label:
+                              "tracking-wider font-medium text-default-600",
+                            value: "text-foreground/60",
+                          }}
+                          label="Average Tasting Map"
                           radius="sm"
                           showValueLabel={true}
                         />
