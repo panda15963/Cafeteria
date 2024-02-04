@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import CoffeeBeanMenu from "../slider/CoffeeBeanMenuData";
 import NavBar from "../navbars/NavBar";
@@ -20,19 +20,18 @@ const ProductDetails = () => {
       sum += tasting_map[key];
     }
     return sum / 5;
-  }
-  console.log(addToCart(product?.name));
+  };
   const add_cart = () => {
     if (user.user === null) {
       alert("Please sign in first!");
       router.push("/components/SignIn");
     } else {
       alert("Added to Cart!");
-      addToCart(product?.name);
-      alert(addToCart(product?.name));
+      addToCart(id);
+      console.log(addToCart(id));
     }
   };
-  return (    
+  return (
     <div>
       <NavBar />
       <div className="container">
