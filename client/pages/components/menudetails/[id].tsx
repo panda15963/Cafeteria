@@ -23,7 +23,11 @@ const ProductDetails = () => {
     return sum / 5;
   };
   const decrease_amount = () => {
-    setAmount(amount - 1);
+    if (amount == 1){
+      setAmount(1);
+    } else {
+      setAmount(amount - 1);
+    }
   }
   const increase_amount = () => {
     setAmount(amount + 1);
@@ -37,6 +41,9 @@ const ProductDetails = () => {
       addToCart(product);
     }
   };
+  const total_price = () => {
+    return ((product?.price ?? 0) * amount + 3).toFixed(2)
+  }
   return (
     <div>
       <NavBar />
@@ -87,7 +94,7 @@ const ProductDetails = () => {
                     <button id="minus" className="border-2 px-2" onClick={decrease_amount}>
                       -
                     </button>
-                    <input type="number" className="w-1/2 border-2 text-center" value={amount} />
+                    <input type="number" className="w-1/2 border-2 text-center" value={amount} disabled/>
                     <button id="plus" className="border-2 px-2" onClick={increase_amount}>
                       +
                     </button>
@@ -106,7 +113,7 @@ const ProductDetails = () => {
             <main className="flex justify-center py-5">
               <div className="flex justify-center">
                 <h1 className="text-2xl font-bold">Total Price :</h1>
-
+                <h1 className="text-2xl font-bold ml-4">${total_price()}</h1>
               </div>
             </main>
           </main>
