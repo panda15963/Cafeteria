@@ -3,12 +3,12 @@ const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({});
   const [isInCart, setIsInCart] = useState(false);
-  const addToCart = (product) => {
-    setCart({...cart, product});
+  const addToCart = (productData) => {
+    setCart([productData, ...cart]);
     setIsInCart(true);    
   };
-  const removeFromCart = (product) => {
-    setCart(cart.filter((item) => item.id !== product.id));
+  const removeFromCart = (productData) => {
+    setCart(cart.filter((item) => item.id !== productData.id));
     setIsInCart(false);
   };
   return (

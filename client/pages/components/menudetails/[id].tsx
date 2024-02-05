@@ -8,6 +8,7 @@ import { Progress } from "@nextui-org/progress";
 import { useUser } from "../../contexts/UserContext";
 import { useCart } from "../../contexts/CartContext";
 const ProductDetails = () => {
+  const [amount, setAmount] = useState(1);
   const router = useRouter();
   const { id } = router.query;
   const product = CoffeeBeanMenu.find((item) => item.name === id);
@@ -21,14 +22,19 @@ const ProductDetails = () => {
     }
     return sum / 5;
   };
+  const decrease_amount = () => {
+    setAmount(amount - 1);
+  }
+  const increase_amount = () => {
+    setAmount(amount + 1);
+  }
   const add_cart = () => {
     if (user.user === null) {
       alert("Please sign in first!");
       router.push("/components/SignIn");
     } else {
       alert("Added to Cart!");
-      addToCart(id);
-      console.log(addToCart(id));
+      addToCart(product);
     }
   };
   return (
@@ -75,23 +81,33 @@ const ProductDetails = () => {
                   <td>Price :</td>
                   <td>${product?.price}</td>
                 </tr>
+                <tr>
+                  <td>Amount :</td>
+                  <td>
+                    <button id="minus" className="border-2 px-2" onClick={decrease_amount}>
+                      -
+                    </button>
+                    <input type="number" className="w-1/2 border-2 text-center" value={amount} />
+                    <button id="plus" className="border-2 px-2" onClick={increase_amount}>
+                      +
+                    </button>
+                  </td>
+                </tr>
               </tbody>
             </table>
             <main className="flex justify-center py-5">
               <button
                 onClick={add_cart}
-                className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full"
+                className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 w-full px-4 rounded-full focus:outline-none focus:shadow-outline"
               >
                 Add to Cart
               </button>
-              <Link
-                href="/components/menudetails/CoffeeBeanMenu"
-                className="px-5"
-              >
-                <button className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded-full">
-                  Buy Now
-                </button>
-              </Link>
+            </main>
+            <main className="flex justify-center py-5">
+              <div className="flex justify-center">
+                <h1 className="text-2xl font-bold">Total Price :</h1>
+
+              </div>
             </main>
           </main>
         </div>
