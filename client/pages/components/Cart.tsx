@@ -9,7 +9,7 @@ const ShoppingCartPage = () => {
   const cart_lists = async (user_info : any) => {
     try {
       const response = await axios.post("http://localhost:3001/api/cart", { user_info });
-      console.log(response);
+      console.log(response.data);
     } catch (error) {
       console.log(error);
     }

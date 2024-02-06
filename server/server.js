@@ -105,7 +105,7 @@ app.post('/api/addcart', (req, res) => {
 });
 // get shopping list at cart
 app.post(`/api/cart`, (req, res) => {
-  const GET_CART_QUERY = `SELECT * FROM carts WHERE id = '${req.body.id}'`;
+  const GET_CART_QUERY = `SELECT * FROM carts`;
   db.query(GET_CART_QUERY, (err, results) => {
     if (err) {
       return res.send(err);
