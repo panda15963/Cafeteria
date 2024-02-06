@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import Link from "next/link";
 import CoffeeBeanMenu from "../slider/CoffeeBeanMenuData";
 import NavBar from "../navbars/NavBar";
 import Footer from "../Footer";
 import { useRouter } from "next/router";
 import { Progress } from "@nextui-org/progress";
 import { useUser } from "../../contexts/UserContext";
-import { useCart } from "../../contexts/CartContext";
+import axios from "axios";
 const ProductDetails = () => {
   const [amount, setAmount] = useState(1);
   const router = useRouter();
@@ -14,7 +13,6 @@ const ProductDetails = () => {
   const product = CoffeeBeanMenu.find((item) => item.name === id);
   const date = new Date();
   const user = useUser();
-  const { addToCart } = useCart();
   const average_tasingMap = (tasting_map: any) => {
     let sum = 0;
     for (let key in tasting_map) {
@@ -30,15 +28,34 @@ const ProductDetails = () => {
     }
   }
   const increase_amount = () => {
-    setAmount(amount + 1);
+    if (amount >= 10) {
+      setAmount(10);
+      alert("You can only buy 10 packs or less at a time!");
+    } else {
+      setAmount(amount + 1);
+    }
   }
-  const add_cart = () => {
+  const add_cart = async (e:any) => {
+    e.preventDefault();
     if (user.user === null) {
       alert("Please sign in first!");
       router.push("/components/SignIn");
     } else {
-      alert("Added to Cart!");
-      addToCart(product);
+      try {
+        const response = await axios.post("http://localhost:3001/api/addcart", {
+          id: user.user.id,
+          name: product?.name,
+          price : product?.price,
+          amount: amount,
+        })
+        if (response.data.code === "ER_DUP_ENTRY") {
+          alert("This product is already in your cart!");
+        } else {
+          alert("Add to cart successfully!");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   const total_price = () => {
@@ -91,11 +108,11 @@ const ProductDetails = () => {
                 <tr>
                   <td>Amount :</td>
                   <td>
-                    <button id="minus" className="border-2 px-2" onClick={decrease_amount}>
+                    <button id="minus" className="border-1 border-black shadow-lg px-2" onClick={decrease_amount}>
                       -
                     </button>
-                    <input type="number" className="w-1/2 border-2 text-center" value={amount} disabled/>
-                    <button id="plus" className="border-2 px-2" onClick={increase_amount}>
+                    <input type="number" className="w-1/2 border-1 border-black shadow-lg text-center" value={amount} disabled/>
+                    <button id="plus" className="border-1 border-black shadow-lg px-2" onClick={increase_amount}>
                       +
                     </button>
                   </td>

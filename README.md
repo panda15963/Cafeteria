@@ -1,4 +1,5 @@
 # Cafeteria
+## User Table
 ``` sql
 CREATE TABLE users (
         id VARCHAR(36) DEFAULT (UUID()) PRIMARY KEY, 
@@ -7,4 +8,14 @@ CREATE TABLE users (
         username VARCHAR(255) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL
     );
+```
+## Cart Table
+``` sql
+CREATE TABLE carts (
+    id VARCHAR(36) NOT NULL,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    price FLOAT(11) NOT NULL,
+    amount INT(11) NOT NULL,
+    FOREIGN KEY (id) REFERENCES users(id)
+);
 ```

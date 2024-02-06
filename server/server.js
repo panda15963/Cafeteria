@@ -91,6 +91,29 @@ app.post('/api/searchuser', (req, res) => {
     }
   });
 });
+// add shopping list at cart
+app.post('/api/addcart', (req, res) => {
+  const { id, name, price, amount } = req.body;
+  const INSERT_CART_QUERY = `INSERT INTO carts (id, name, price, amount) VALUES ('${id}', '${name}', '${price}', '${amount}')`;
+  db.query(INSERT_CART_QUERY, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.send(results);
+    }
+  });
+});
+// get shopping list at cart
+app.post(`/api/cart`, (req, res) => {
+  const GET_CART_QUERY = `SELECT * FROM carts WHERE id = '${req.body.id}'`;
+  db.query(GET_CART_QUERY, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.send(results);
+    }
+  });
+});
 // listen on port 3001
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
