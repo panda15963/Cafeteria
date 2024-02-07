@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useUser } from "../contexts/UserContext";
 import NavBar from "./navbars/NavBar";
@@ -29,10 +29,10 @@ const Cart = () => {
     for (let i = 0; i < cart.length; i++) {
       total += cart[i].total;
     }
-    setTotal(total);
+    setTotal(parseFloat((total + 3).toFixed(2)));
   }, [cart]);
   const removeItem = () => {
-    
+    console.log(cart);
   }
   const items = cart.map((item: any) => {
     return (
@@ -74,7 +74,7 @@ const Cart = () => {
       <div className="container mx-auto px-5">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
           <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
+            <thead className="text-lg text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
               <tr className="px-16 py-3">
                 <th scope="col">Image</th>
                 <th scope="col">Item</th>

@@ -61,7 +61,7 @@ const ProductDetails = () => {
     }
   };
   const total_price = () => {
-    return ((product?.price ?? 0) * amount + 3).toFixed(2)
+    return ((product?.price ?? 0) * amount).toFixed(2)
   }
   return (
     <div>

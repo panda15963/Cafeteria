@@ -158,7 +158,7 @@ const Signup = () => {
     } else if (name === "phonenumber") {
       if (value.length > 20) {
         setPhoneNumberValid(false);
-      } else if (value.includes("-", "+")) {
+      } else if (value.includes("-") || value.includes("+")) {
         setPhoneNumberValid(false);
       } else {
         setPhoneNumberValid(true);
