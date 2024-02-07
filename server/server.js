@@ -26,8 +26,8 @@ db.connect((err) => {
 });
 // register a new user
 app.post('/api/signup', (req, res) => {
-  const { email, password, name, username } = req.body;
-  const INSERT_USER_QUERY = `INSERT INTO users (email, password, name, username) VALUES ('${email}', '${password}', '${name}', '${username}')`;
+  const { email, password, name, username, phonenumber, address } = req.body;
+  const INSERT_USER_QUERY = `INSERT INTO users (email, password, name, username, phonenumber, address) VALUES ('${email}', '${password}', '${name}', '${username}', '${phonenumber}', '${address}')`;
   db.query(INSERT_USER_QUERY, (err, results) => {
     if (err) {
       return res.send(err);
@@ -59,8 +59,8 @@ app.post('/api/signin', (req, res) => {
 });
 // update a user
 app.put('/api/updateuser', (req, res) => {
-  const { email, password, name, username } = req.body;
-  const UPDATE_USER_QUERY = `UPDATE users SET email = '${email}', password = '${password}', name = '${name}', username = '${username}' WHERE id = '${req.body.id}'`;
+  const { email, password, name, username, phonenumber, address } = req.body;
+  const UPDATE_USER_QUERY = `UPDATE users SET email = '${email}', password = '${password}', name = '${name}', username = '${username}', phonenumber = '${phonenumber}', address = '${address}', WHERE id = '${req.body.id}'`;
   db.query(UPDATE_USER_QUERY, (err, results) => {
     if (err) {
       return res.send(err);
@@ -93,8 +93,8 @@ app.post('/api/searchuser', (req, res) => {
 });
 // add shopping list at cart
 app.post('/api/addcart', (req, res) => {
-  const { id, name, price, amount } = req.body;
-  const INSERT_CART_QUERY = `INSERT INTO carts (id, name, price, amount) VALUES ('${id}', '${name}', '${price}', '${amount}')`;
+  const { id, image, name, price, amount, total } = req.body;
+  const INSERT_CART_QUERY = `INSERT INTO carts (id, image, name, price, amount, total) VALUES ('${id}', '${image}', '${name}', '${price}', '${amount}', '${total}')`;
   db.query(INSERT_CART_QUERY, (err, results) => {
     if (err) {
       return res.send(err);
@@ -108,6 +108,17 @@ app.post(`/api/cart`, (req, res) => {
   const GET_CART_QUERY = `SELECT * FROM carts`;
   db.query(GET_CART_QUERY, (err, results) => {
     if (err) {
+      return res.send(err);
+    } else {
+      return res.send(results);
+    }
+  });
+});
+// delete shopping list at cart
+app.delete('/api/deletecart', (req, res) => {
+  const DELETE_CART_QUERY = `DELETE FROM carts where name = '${req.body.name}'`;
+  db.query(DELETE_CART_QUERY, (err, results) => {
+    if(err) {
       return res.send(err);
     } else {
       return res.send(results);

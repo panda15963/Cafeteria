@@ -9,26 +9,39 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [username, setUserName] = useState("");
   const [name, setName] = useState("");
+  const [phonenumber, setPhoneNumber] = useState("");
+  const [addressdetails, setAddressDetails] = useState("");
+  const [city, setCity] = useState("");
+  const [postalcode, setPostalCode] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isUserNameValid, setIsUserNameValid] = useState(true);
   const [isNameValid, setIsNameValid] = useState(true);
+  const [isPhoneNumberValid, setPhoneNumberValid] = useState(true);
   const router = useRouter();
   const sendDataToServer = async (e: any) => {
     e.preventDefault();
+    const address = `${addressdetails} ${city} ${postalcode}`;
     try {
       const response = await axios.post("http://localhost:3001/api/signup", {
         email,
         password,
         username,
         name,
+        phonenumber,
+        address,
       });
+      console.log(response);
       if (response.data.sqlMessage === undefined) {
         alert("User Created Successfully");
         setEmail("");
         setPassword("");
         setUserName("");
         setName("");
+        setPhoneNumber("");
+        setPostalCode("");
+        setCity("");
+        setAddressDetails("");
         router.push("SignIn");
         return;
       } else if (response.data.sqlMessage.includes("Duplicate entry")) {
@@ -37,6 +50,10 @@ const Signup = () => {
         setPassword("");
         setUserName("");
         setName("");
+        setPhoneNumber("");
+        setPostalCode("");
+        setCity("");
+        setAddressDetails("");
         return;
       }
       alert("Error Occured");
@@ -44,12 +61,20 @@ const Signup = () => {
       setPassword("");
       setUserName("");
       setName("");
+      setPhoneNumber("");
+      setPostalCode("");
+      setCity("");
+      setAddressDetails("");
     } catch (error) {
       console.log(error);
       setEmail("");
       setPassword("");
       setUserName("");
       setName("");
+      setPhoneNumber("");
+      setPostalCode("");
+      setCity("");
+      setAddressDetails("");
     }
   };
   const handleChange = (e: any) => {
@@ -130,6 +155,21 @@ const Signup = () => {
         setIsNameValid(true);
         setName(value);
       }
+    } else if (name === "phonenumber") {
+      if (value.length > 20) {
+        setPhoneNumberValid(false);
+      } else if (value.includes("-", "+")) {
+        setPhoneNumberValid(false);
+      } else {
+        setPhoneNumberValid(true);
+        setPhoneNumber(value);
+      }
+    } else if (name === "addressdetails") {
+      setAddressDetails(value);
+    } else if (name === "city") {
+      setCity(value);
+    } else if (name === "postalcode") {
+      setPostalCode(value);
     }
   };
   return (
@@ -189,6 +229,30 @@ const Signup = () => {
             </div>
             <div className="mb-4">
               <label
+                htmlFor="phonenumber"
+                className="block text-gray-600 text-sm font-medium mb-2 font-bold"
+              >
+                Phone Number
+              </label>
+              <input
+                type="text"
+                id="phonenumber"
+                name="phonenumber"
+                className="w-full p-2 border-2 rounded"
+                placeholder="Enter your Phone Number"
+                defaultValue={phonenumber}
+                onChange={handleChange}
+                style={{ borderColor: isPhoneNumberValid ? "black" : "red" }}
+                required
+              />
+              <p style={{ color: isPhoneNumberValid ? "" : "red" }}>
+                {isPhoneNumberValid
+                  ? ""
+                  : "Phone Number should not contain any character and country code"}
+              </p>
+            </div>
+            <div className="mb-4">
+              <label
                 htmlFor="email"
                 className="block text-gray-600 text-sm font-medium mb-2 font-bold"
               >
@@ -232,6 +296,44 @@ const Signup = () => {
                   ? ""
                   : "Password should contain at least 8 characters, 1 uppercase, 1 lowercase, 1 number and 1 special character"}
               </p>
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="address"
+                className="block text-gray-600 text-sm font-medium mb-2 font-bold"
+              >
+                Address
+              </label>
+              <input
+                type="text"
+                id="postalcode"
+                name="postalcode"
+                className="w-full p-2 border-2 rounded border-black"
+                placeholder="Enter your postalcode"
+                defaultValue={postalcode}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                id="city"
+                name="city"
+                className="w-full p-2 border-2 rounded border-black"
+                placeholder="Enter your city"
+                defaultValue={city}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                id="addressdetails"
+                name="addressdetails"
+                className="w-full p-2 border-2 rounded border-black"
+                placeholder="Enter your address"
+                defaultValue={addressdetails}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="mb-4">
               <button

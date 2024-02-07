@@ -9,10 +9,15 @@ const UpdateUser = () => {
   const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phonenumber, setPhoneNumber] = useState("");
+  const [addressdetails, setAddressDetails] = useState("");
+  const [city, setCity] = useState("");
+  const [postalcode, setPostalCode] = useState("");
   const [isEmailValid, setIsEmailValid] = useState(true);
   const [isPasswordValid, setIsPasswordValid] = useState(true);
   const [isUserNameValid, setIsUserNameValid] = useState(true);
   const [isNameValid, setIsNameValid] = useState(true);
+  const [isPhoneNumberValid, setPhoneNumberValid] = useState(true);
   const { user, logout } = useUser();
   const handleDelete = () => {
     try {
@@ -42,9 +47,10 @@ const UpdateUser = () => {
     } catch (error: any) {
       console.log(error);
     }
-  }
+  };
   const handleSubmit = (event: any) => {
     event.preventDefault();
+    const address = `${addressdetails} ${city} ${postalcode}`;
     try {
       axios
         .put("http://localhost:3001/api/updateuser", {
@@ -52,6 +58,8 @@ const UpdateUser = () => {
           username,
           email,
           password,
+          phonenumber,
+          address,
           id: user.id,
         })
         .then((response) => {
@@ -61,6 +69,10 @@ const UpdateUser = () => {
             setUserName("");
             setEmail("");
             setPassword("");
+            setPhoneNumber("");
+            setPostalCode("");
+            setCity("");
+            setAddressDetails("");
             router.push("/");
             logout();
           } else if (response.data.sqlMessage.includes("Duplicate entry")) {
@@ -69,12 +81,20 @@ const UpdateUser = () => {
             setUserName("");
             setEmail("");
             setPassword("");
+            setPhoneNumber("");
+            setPostalCode("");
+            setCity("");
+            setAddressDetails("");
           } else {
             alert("Something went wrong");
             setName("");
             setUserName("");
             setEmail("");
             setPassword("");
+            setPhoneNumber("");
+            setPostalCode("");
+            setCity("");
+            setAddressDetails("");
           }
         });
     } catch (error: any) {
@@ -171,12 +191,31 @@ const UpdateUser = () => {
         setIsNameValid(false);
       } else if (value === user.name) {
         setIsNameValid(false);
-      } else if (value.split(" ").length > 3 || value.split(" ").length < 1 || value === "") {
+      } else if (
+        value.split(" ").length > 3 ||
+        value.split(" ").length < 1 ||
+        value === ""
+      ) {
         setIsNameValid(false);
       } else {
         setIsNameValid(true);
         setName(value);
       }
+    } else if (name === "phonenumber") {
+      if (value.length > 20) {
+        setPhoneNumberValid(false);
+      } else if (value.includes("-", "+")) {
+        setPhoneNumberValid(false);
+      } else {
+        setPhoneNumberValid(true);
+        setPhoneNumber(value);
+      }
+    } else if (name === "addressdetails") {
+      setAddressDetails(value);
+    } else if (name === "city") {
+      setCity(value);
+    } else if (name === "postalcode") {
+      setPostalCode(value);
     }
   };
   return (
@@ -245,6 +284,66 @@ const UpdateUser = () => {
               <p style={{ color: isPasswordValid ? "" : "red" }}>
                 {isPasswordValid ? "" : "Password is not valid or empty"}
               </p>
+            </div>
+            <div className="mb-4">
+              <label
+                className="block mb-2"
+              >
+                Phone Number
+              </label>
+              <input
+                type="text"
+                id="phonenumber"
+                name="phonenumber"
+                className="w-full p-2 border-2 rounded"
+                placeholder="Enter your Phone Number"
+                defaultValue={phonenumber}
+                onChange={handleChange}
+                required
+              />
+              <p style={{ color: isPhoneNumberValid ? "" : "red" }}>
+                {isPhoneNumberValid
+                  ? ""
+                  : "Phone Number should not contain any character and country code"}
+              </p>
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="address"
+                className="block text-gray-600 text-sm font-medium mb-2 font-bold"
+              >
+                Address
+              </label>
+              <input
+                type="text"
+                id="postalcode"
+                name="postalcode"
+                className="w-full p-2 border-2 rounded"
+                placeholder="Enter your postalcode"
+                defaultValue={postalcode}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                id="city"
+                name="city"
+                className="w-full p-2 border-2 rounded"
+                placeholder="Enter your city"
+                defaultValue={city}
+                onChange={handleChange}
+                required
+              />
+              <input
+                type="text"
+                id="addressdetails"
+                name="addressdetails"
+                className="w-full p-2 border-2 rounded"
+                placeholder="Enter your address"
+                defaultValue={addressdetails}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="mb-4">
               <button

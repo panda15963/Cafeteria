@@ -44,9 +44,11 @@ const ProductDetails = () => {
       try {
         const response = await axios.post("http://localhost:3001/api/addcart", {
           id: user.user.id,
+          image: product?.image,
           name: product?.name,
           price : product?.price,
           amount: amount,
+          total : total_price(),
         })
         if (response.data.code === "ER_DUP_ENTRY") {
           alert("This product is already in your cart!");

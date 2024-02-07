@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import NavBar from './navbars/NavBar';
 import Footer from "./Footer";
 import axios from "axios";
@@ -44,7 +44,7 @@ const SignIn = () => {
       setPassword("");
     }
   };
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     switch (name) {
       case "email":
