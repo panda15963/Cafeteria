@@ -6,7 +6,14 @@
     "@nextui-org/react": "^2.2.9",
     "antd": "^5.13.3",
     "framer-motion": "^11.0.3",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.9.1",
+    "net": "^1.0.2",
     "next-auth": "^4.24.5",
-    "swiper": "^11.0.5"
+    "swiper": "^11.0.5",
+    "tls": "^0.0.1"
+  },
+  "devDependencies": {
+    "@types/mysql": "^2.15.25"
   }
 }

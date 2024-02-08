@@ -32,8 +32,23 @@ const Cart = () => {
     setTotal(parseFloat((total + 3).toFixed(2)));
   }, [cart]);
   const removeItem = () => {
-    console.log(cart);
-  }
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].id == user_info) {
+        console.log(cart.splice(i, 1));
+        axios
+          .delete("http://localhost:3001/api/cart/")
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        console.log("error");
+        break;
+      }
+    }
+  };
   const items = cart.map((item: any) => {
     return (
       <tbody key={item.id}>
@@ -54,7 +69,10 @@ const Cart = () => {
             ${item.total}
           </td>
           <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-            <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" onClick={removeItem}>
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+              onClick={removeItem}
+            >
               Remove
             </button>
           </td>
@@ -69,7 +87,7 @@ const Cart = () => {
         Shopping Carts List
       </h1>
       <p className="text-center text-xl font-bold py-5">
-        ※ Shipping Fees includes in the Total Price.
+        ※ Shipping Fee includes in the Total Price.
       </p>
       <div className="container mx-auto px-5">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">

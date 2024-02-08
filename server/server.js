@@ -1,4 +1,4 @@
-// server.js
+import Cart from '../client/src/components/Cart';
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -91,6 +91,26 @@ app.post('/api/searchuser', (req, res) => {
     }
   });
 });
+app.post('/api/addproduct', (req, res) => {
+  const user_info = Cart.user_info;
+  const { id, image, name, price, amount, total } = req.body;
+  const CREATE_PRODUCT_QUERY = `CREATE TABLE ${user_info} (id VARCHAR(255), image VARCHAR(255), name VARCHAR(255), price VARCHAR(255), amount VARCHAR(255), total VARCHAR(255))`;
+  const INSERT_PRODUCT_QUERY = `INSERT INTO ${user_info} (id, image, name, price, amount, total) VALUES ('${id}', '${image}', '${name}', '${price}', '${amount}', '${total}')`;
+  db.query(CREATE_PRODUCT_QUERY, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.send(results);
+    }
+  });
+  db.query(INSERT_PRODUCT_QUERY, (err, results) => {
+    if (err) {
+      return res.send(err);
+    } else {
+      return res.send(results);
+    }
+  });
+});
 // add shopping list at cart
 app.post('/api/addcart', (req, res) => {
   const { id, image, name, price, amount, total } = req.body;
@@ -115,8 +135,8 @@ app.post(`/api/cart`, (req, res) => {
   });
 });
 // delete shopping list at cart
-app.delete('/api/deletecart', (req, res) => {
-  const DELETE_CART_QUERY = `DELETE FROM carts where name = '${req.body.name}'`;
+app.delete('/api/cart', (req, res) => {
+  const DELETE_CART_QUERY = `DELETE FROM carts WHERE id = '${req.body.id}'`;
   db.query(DELETE_CART_QUERY, (err, results) => {
     if(err) {
       return res.send(err);
