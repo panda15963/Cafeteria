@@ -3,7 +3,9 @@ import axios from "axios";
 import { useUser } from "../contexts/UserContext";
 import NavBar from "./navbars/NavBar";
 import Footer from "./Footer";
+import { useRouter } from "next/router";
 const Cart = () => {
+  const router = useRouter();
   const { user } = useUser();
   const user_info = user.id;
   const [cart, setCart] = useState<any>([]);
@@ -11,7 +13,7 @@ const Cart = () => {
   const [total, setTotal] = useState(0);
   useEffect(() => {
     axios
-      .post("http://localhost:3001/api/cart", { user_info })
+      .post("http://localhost:3001/api/addcart", { user_info })
       .then((response) => {
         for (let i = 0; i < response.data.length; i++) {
           if (response.data[i].id == user_info) {
@@ -25,30 +27,46 @@ const Cart = () => {
       });
   }, []);
   useEffect(() => {
+    axios
+      .post("http://localhost:3001/api/showcart", { user_info })
+      .then((res) => {
+        setCart(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+  });
+  useEffect(() => {
     let total = 0;
     for (let i = 0; i < cart.length; i++) {
       total += cart[i].total;
     }
-    setTotal(parseFloat((total + 3).toFixed(2)));
+    setTotal(parseFloat((total).toFixed(2)));
   }, [cart]);
-  const removeItem = () => {
-    for (let i = 0; i < cart.length; i++) {
-      if (cart[i].id == user_info) {
-        console.log(cart.splice(i, 1));
-        axios
-          .delete("http://localhost:3001/api/cart/")
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        console.log("error");
-        break;
-      }
-    }
+  const handleRemoveItem = () => {
+    axios
+      .post("http://localhost:3001/api/deletecart", {
+        id: user_info,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
+  const counting_items = () => {
+    let total = 0;
+    for (let i = 0; i < cart.length; i++) {
+      total += cart[i].amount;
+    }
+    if (total === 0) {
+      alert("Please add items to your cart");
+    } else {
+      alert("Let's go to the checkout page");
+      router.push("/components/Order");
+    }
+  }
   const items = cart.map((item: any) => {
     return (
       <tbody key={item.id}>
@@ -67,14 +85,6 @@ const Cart = () => {
           </td>
           <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
             ${item.total}
-          </td>
-          <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white">
-            <button
-              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
-              onClick={removeItem}
-            >
-              Remove
-            </button>
           </td>
         </tr>
       </tbody>
@@ -99,23 +109,21 @@ const Cart = () => {
                 <th scope="col">Price</th>
                 <th scope="col">Quantity</th>
                 <th scope="col">Total Price</th>
-                <th scope="col">Actions</th>
               </tr>
             </thead>
             {items}
           </table>
         </div>
       </div>{" "}
-      <div className="container mx-auto px-5">
-        <div className="flex justify-end">
-          <h1 className="text-2xl font-bold py-5">Total Price: ${total}</h1>
-        </div>
-      </div>
-      <div className="container mx-auto px-5">
-        <div className="flex justify-end">
-          <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full">
+      <div className="flex justify-between px-80">
+        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" onClick={handleRemoveItem}>Remove All</button>
+        <button className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full" onClick={counting_items}>
             Checkout
-          </button>
+        </button>
+      </div>
+      <div className="container mx-auto px-2">
+        <div className="flex justify-center">
+          <h1 className="text-2xl font-bold py-5">Total Price: ${total}</h1>
         </div>
       </div>
       <Footer />

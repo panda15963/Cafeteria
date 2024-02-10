@@ -1,4 +1,3 @@
-import Cart from '../client/src/components/Cart';
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -10,6 +9,7 @@ const fs = require('fs');
 require('dotenv').config();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // connect to mysql database
 const db = mysql.createConnection({
@@ -91,30 +91,10 @@ app.post('/api/searchuser', (req, res) => {
     }
   });
 });
-app.post('/api/addproduct', (req, res) => {
-  const user_info = Cart.user_info;
-  const { id, image, name, price, amount, total } = req.body;
-  const CREATE_PRODUCT_QUERY = `CREATE TABLE ${user_info} (id VARCHAR(255), image VARCHAR(255), name VARCHAR(255), price VARCHAR(255), amount VARCHAR(255), total VARCHAR(255))`;
-  const INSERT_PRODUCT_QUERY = `INSERT INTO ${user_info} (id, image, name, price, amount, total) VALUES ('${id}', '${image}', '${name}', '${price}', '${amount}', '${total}')`;
-  db.query(CREATE_PRODUCT_QUERY, (err, results) => {
-    if (err) {
-      return res.send(err);
-    } else {
-      return res.send(results);
-    }
-  });
-  db.query(INSERT_PRODUCT_QUERY, (err, results) => {
-    if (err) {
-      return res.send(err);
-    } else {
-      return res.send(results);
-    }
-  });
-});
 // add shopping list at cart
 app.post('/api/addcart', (req, res) => {
   const { id, image, name, price, amount, total } = req.body;
-  const INSERT_CART_QUERY = `INSERT INTO carts (id, image, name, price, amount, total) VALUES ('${id}', '${image}', '${name}', '${price}', '${amount}', '${total}')`;
+  const INSERT_CART_QUERY = `INSERT INTO carts (user_id, image, name, price, amount, total) VALUES ('${id}', '${image}', '${name}', '${price}', '${amount}', '${total}')`;
   db.query(INSERT_CART_QUERY, (err, results) => {
     if (err) {
       return res.send(err);
@@ -123,20 +103,21 @@ app.post('/api/addcart', (req, res) => {
     }
   });
 });
-// get shopping list at cart
-app.post(`/api/cart`, (req, res) => {
-  const GET_CART_QUERY = `SELECT * FROM carts`;
-  db.query(GET_CART_QUERY, (err, results) => {
+// show shopping list at cart
+app.post('/api/showcart', (req, res) => {
+  const  SHOW_CART_QUERY = `SELECT * FROM carts ORDER BY id`;
+  db.query(SHOW_CART_QUERY, (err, results) => {
     if (err) {
-      return res.send(err);
+      return res.send(err + 'error');
     } else {
       return res.send(results);
     }
   });
 });
 // delete shopping list at cart
-app.delete('/api/cart', (req, res) => {
-  const DELETE_CART_QUERY = `DELETE FROM carts WHERE id = '${req.body.id}'`;
+app.post('/api/deletecart', (req, res) => {
+  const { id } = req.body;
+  const DELETE_CART_QUERY = `DELETE FROM carts WHERE user_id = '${id}'`;
   db.query(DELETE_CART_QUERY, (err, results) => {
     if(err) {
       return res.send(err);
