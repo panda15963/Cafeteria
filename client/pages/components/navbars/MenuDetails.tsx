@@ -12,10 +12,6 @@ const mainmenu: menus[] = [
     name: "Coffee Beans",
     link: "/components/menudetails/CoffeeBeanMenu",
   },
-  {
-    name: "Locations",
-    link: "/components/Locations",
-  },
 ];
 const mainlistItems = mainmenu.map((data) => (
   <li className="mt-3 md:mt-0 md:ml-6" key={data.name}>
