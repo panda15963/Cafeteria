@@ -5,7 +5,6 @@ const mysql = require('mysql');
 const jwt = require('jsonwebtoken');
 const app = express();
 const port = process.env.PORT || 3001;
-const fs = require('fs');
 require('dotenv').config();
 app.use(cors());
 app.use(bodyParser.json());
@@ -37,7 +36,6 @@ app.post('/api/signup', (req, res) => {
   });
 });
 // login a user
-const privateKey = fs.readFileSync(process.env.JWT_SECRET, 'utf8');
 app.post('/api/signin', (req, res) => {
   const SELECT_USER_QUERY = `SELECT * FROM users`;
   db.query(SELECT_USER_QUERY, (err, results) => {
@@ -46,7 +44,7 @@ app.post('/api/signin', (req, res) => {
     } else {
       if (results.length > 0) {
         const user = results.find(user => user.email === req.body.email && user.password === req.body.password);
-        const token = jwt.sign({ user }, privateKey, { algorithm: 'HS256' });
+        const token = jwt.sign({ user }, { algorithm: 'HS256' });
         if (!user) {
           return res.send({ error: 'User not found' });
         }
