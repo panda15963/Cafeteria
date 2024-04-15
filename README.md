@@ -51,3 +51,16 @@ CREATE TABLE carts (\
 3. Register and login for a new user. Then click the menu button at top right corner.
 4. Try to add product into cart by clicking plus button or minus button.
 5. Click checkout button if you want to buy something. However, if you click "Place Order", it will be failed because I coded to pop up an alert and move to main page.
+
+## Example
+- Main
+![main1](https://github.com/panda15963/Cafeteria/assets/45156127/c15e8a88-2408-4bc6-863c-cff3eeaf4956)
+![main2](https://github.com/panda15963/Cafeteria/assets/45156127/e88fd0db-86fc-4991-96ec-65a00a8d412a)
+- Register
+![register](https://github.com/panda15963/Cafeteria/assets/45156127/b02a5f86-1348-4154-b428-5ff7bba2c28b)
+- Login
+![Login](https://github.com/panda15963/Cafeteria/assets/45156127/b1cfa09e-3e23-4505-aad9-4fedf7048072)
+- Menu
+![items](https://github.com/panda15963/Cafeteria/assets/45156127/d8bc06a2-6050-4173-9504-a09e4d4bdce4)
+- Details
+![details](https://github.com/panda15963/Cafeteria/assets/45156127/9d348684-1dc1-4d87-accf-065eea9d67fc)
