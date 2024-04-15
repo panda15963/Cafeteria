@@ -12,10 +12,10 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 // connect to mysql database
 const db = mysql.createConnection({
-  host : process.env.DB_HOST,
-  user : process.env.DB_USER, 
-  password : process.env.DB_PWD,
-  database : process.env.DB_NAME,
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PWD,
+  database: process.env.DB_NAME,
 });
 db.connect((err) => {
   if (err) {
@@ -39,7 +39,7 @@ app.post('/api/signup', (req, res) => {
 app.post('/api/signin', (req, res) => {
   const SELECT_USER_QUERY = `SELECT * FROM users`;
   db.query(SELECT_USER_QUERY, (err, results) => {
-    if (err){
+    if (err) {
       return res.send(err);
     } else {
       if (results.length > 0) {
@@ -71,7 +71,7 @@ app.put('/api/updateuser', (req, res) => {
 app.delete('/api/deleteuser', (req, res) => {
   const DELETE_USER_QUERY = `DELETE FROM users WHERE id = '${req.body.id}'`;
   db.query(DELETE_USER_QUERY, (err, results) => {
-    if(err) {
+    if (err) {
       return res.send(err);
     } else {
       return res.send(results);
@@ -103,7 +103,7 @@ app.post('/api/addcart', (req, res) => {
 });
 // show shopping list at cart
 app.post('/api/showcart', (req, res) => {
-  const  SHOW_CART_QUERY = `SELECT * FROM carts ORDER BY id`;
+  const SHOW_CART_QUERY = `SELECT * FROM carts ORDER BY id`;
   db.query(SHOW_CART_QUERY, (err, results) => {
     if (err) {
       return res.send(err + 'error');
@@ -117,7 +117,7 @@ app.post('/api/deletecart', (req, res) => {
   const { id } = req.body;
   const DELETE_CART_QUERY = `DELETE FROM carts WHERE user_id = '${id}'`;
   db.query(DELETE_CART_QUERY, (err, results) => {
-    if(err) {
+    if (err) {
       return res.send(err);
     } else {
       return res.send(results);

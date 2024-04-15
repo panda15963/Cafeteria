@@ -10,8 +10,5 @@ COPY . .
 # 의존성 설치
 RUN npm install
 
-# 포트 설정
-EXPOSE 8000
-
 # 애플리케이션 실행
 CMD ["node", "server.js"]
