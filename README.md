@@ -10,18 +10,15 @@
 - MySQL
 
 ## Getting Started
-1.  Clone the repository using `git clone https://github.com/panda15963/Cafeteria` in your terminal or command prompt.
-2. Install Packages
+1.  Clone the repository in terminal as below command.
 ``` bash
-npm install 
+git clone https://github.com/panda15963/Cafeteria.git
 ```
-3. move to client directory and server directory in each command prompt.
+2. Process command to run the project as below.
 ``` bash
-cd client && npm run dev
-and
-cd server && npm run dev
+docker-compose up
 ```
-4. Open http://localhost:3000 on your browser
+3. Open http://localhost:3000 on your browser
 
 # SQL Table
 1. You should create database named "cafeteria" firstly.
@@ -51,6 +48,6 @@ CREATE TABLE carts (\
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 ```
-3. Try to register and login as a new user. Then click the menu button at top right corner.
+3. Register and login for a new user. Then click the menu button at top right corner.
 4. Try to add product into cart by clicking plus button or minus button.
 5. Click checkout button if you want to buy something. However, if you click "Place Order", it will be failed because I coded to pop up an alert and move to main page.
